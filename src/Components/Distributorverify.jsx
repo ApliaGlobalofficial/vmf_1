@@ -58,11 +58,16 @@ const VerifyDocuments = () => {
       console.error("Token is missing.");
     }
   }, []);
+  const authHeaders={
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  }
   const fetchCertificatesAndDocuments = async (userId) => {
     try {
       const [certRes, docRes] = await Promise.all([
-        axios.get("http://localhost:3000/certificates"),
-        axios.get(`http://localhost:3000/documents/list/${userId}`),
+        axios.get("http://localhost:3000/certificates", authHeaders),
+        axios.get(`http://localhost:3000/documents/list/${userId}`, authHeaders),
       ]);
 
       const certs = certRes.data;
@@ -96,7 +101,7 @@ const VerifyDocuments = () => {
   const fetchCertificates = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/certificates"
+        "http://localhost:3000/certificates", authHeaders
       );
       // assume response.data is an array of certificate objects
       setCertificates(response.data);
@@ -134,7 +139,7 @@ const VerifyDocuments = () => {
   const fetchDocuments = async (distributorId) => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/documents/list/${distributorId}`
+        `http://localhost:3000/documents/list/${distributorId}`, authHeaders
       );
       const filtered = response.data.documents.filter(
         (doc) => doc.status !== "Sent"
@@ -193,17 +198,18 @@ const VerifyDocuments = () => {
 
     try {
       await axios.post(
-        "http://localhost:3000/certificates/upload",
+        "http://localhost:3000/certificates/upload", 
         formData,
         {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${localStorage.getItem("token")}`},
         }
+
       );
       // re-fetch certificates and update document status
       await fetchCertificates();
       await axios.put(
-        `http://localhost:3000/documents/update-status/${documentId}`,
-        { status: "Uploaded" }
+        `http://localhost:3000/documents/update-status/${documentId}`, 
+        { status: "Uploaded" },authHeaders
       );
       setDocuments((p) =>
         p.map((d) =>
@@ -228,7 +234,7 @@ const VerifyDocuments = () => {
       return Swal.fire("Error", "Certificate not found", "error");
     try {
       const res = await axios.get(
-        `http://localhost:3000/certificates/${certificateId}`
+        `http://localhost:3000/certificates/${certificateId}`, authHeaders
       );
       if (res.data.file_url) window.open(res.data.file_url, "_blank");
       else Swal.fire("Error", "Certificate file not found", "error");

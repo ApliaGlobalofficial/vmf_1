@@ -88,9 +88,18 @@ const InvoicePage = () => {
   const [isAdding, setIsAdding] = useState(false);
   const nodeRef = useRef(null);
 
+
+  const token = localStorage.getItem('token'); // adjust key as needed
+  const authHeaders = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }; console.log('invice token token:', token); // Debug: Log the token
+
+
   useEffect(() => {
     axios
-      .get("http://localhost:3000/users/distributors")
+      .get("http://localhost:3000/users/distributors", authHeaders)
       .then((response) => setDistributors(response.data))
       .catch((error) => console.error("Error fetching distributors:", error));
   }, []);
@@ -98,7 +107,7 @@ const InvoicePage = () => {
     try {
       const response = await axios.get(
         `http://localhost:3000/singledocument/documentby/${documentId}`
-      );
+        , authHeaders);
       const data = response.data.document;
       setDocumentData(data);
 
@@ -108,7 +117,7 @@ const InvoicePage = () => {
       if (category && subcategory) {
         const fieldNamesResponse = await axios.get(
           `http://localhost:3000/field-names/${category}/${subcategory}`
-        );
+          , authHeaders);
         setDocumentNames(fieldNamesResponse.data);
       }
     } catch (error) {
@@ -127,6 +136,7 @@ const InvoicePage = () => {
     setShowDocumentViewer(true);
     setCheckedDocs((prev) => ({ ...prev, [index]: true }));
   };
+
   const handleUpdateStatus = async (newStatus) => {
     if (newStatus === "Rejected" && !rejectionReason.trim()) {
       alert("Please enter a reason for rejection.");
@@ -153,9 +163,11 @@ const InvoicePage = () => {
         `http://localhost:3000/documents/update-status/${documentId}`,
         payload,
         {
-          timeout: 30000, // Increase timeout to 30 seconds
+          ...authHeaders,
+          timeout: 30000,
         }
       );
+
 
       console.log("Status updated successfully:", response.data);
 
@@ -193,7 +205,7 @@ const InvoicePage = () => {
 
       // Make the API call to download the ZIP file with increased timeout
       const response = await axios.get(
-        `http://localhost:3000/download/${documentId}`,
+        `http://localhost:3000/download/${documentId}`, authHeaders,
         {
           responseType: "blob", // Handle binary data
           timeout: 60000, // Increase timeout to 60 seconds
@@ -351,18 +363,21 @@ const InvoicePage = () => {
 
       const assignResponse = await axios.put(
         `http://localhost:3000/documents/assign-distributor/${documentId}`,
-        {
-          distributor_id: distributorId,
-          remark: distributorRemark,
-        }
+         {
+        distributor_id: distributorId,
+        remark: distributorRemark,
+        
+      }
+      ,authHeaders,
       );
       console.log("Assign Distributor Response:", assignResponse.data);
 
       const statusResponse = await axios.put(
         `http://localhost:3000/documents/update-status/${documentId}`,
-        {
-          status: "Approved",
-        }
+         {
+        status: "Approved",
+      }
+      ,authHeaders,
       );
       console.log("Update Status Response:", statusResponse.data);
 
@@ -729,11 +744,10 @@ const InvoicePage = () => {
                   {filteredDistributors.map((dist) => (
                     <li
                       key={dist.user_id}
-                      className={`flex items-center border-b last:border-b-0 p-1 rounded ${
-                        selectedDistributor === dist.user_id
+                      className={`flex items-center border-b last:border-b-0 p-1 rounded ${selectedDistributor === dist.user_id
                           ? "bg-blue-200"
                           : ""
-                      }`}
+                        }`}
                     >
                       <input
                         type="checkbox"

@@ -13,36 +13,92 @@ const VerifyDocuments = () => {
   const navigate = useNavigate();
 
   // Fetch data on component mount
+  // useEffect(() => {
+  //   // Fetch documents without a distributor assigned
+  //   axios
+  //     .get("http://localhost:3000/documents/list_nodistributor")
+  //     .then((response) => {
+  //       const sortedDocuments = response.data.documents.sort(
+  //         (a, b) => new Date(b.uploaded_at) - new Date(a.uploaded_at)
+  //       );
+  //       setDocuments(sortedDocuments); // Ensure documents are sorted from newest to oldest
+  //     })
+  //     .catch((error) => console.error("Error fetching documents:", error));
+
+  //   // Fetch distributors
+  //   axios
+  //     .get("http://localhost:3000/users/distributors")
+  //     .then((response) => setDistributors(response.data))
+  //     .catch((error) => console.error("Error fetching distributors:", error));
+
+  //   // Fetch certificates
+  //   axios
+  //     .get("http://localhost:3000/certificates")
+  //     .then((response) => setCertificates(response.data))
+  //     .catch((error) => console.error("Error fetching certificates:", error));
+
+  //   // Fetch users
+  //   axios
+  //     .get("http://localhost:3000/users/register")
+  //     .then((response) => setUsers(response.data))
+  //     .catch((error) => console.error("Error fetching users:", error));
+  // }, []);
+
+  const token = localStorage.getItem('token'); // adjust key as needed
+  const authHeaders = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   useEffect(() => {
-    // Fetch documents without a distributor assigned
-    axios
-      .get("http://localhost:3000/documents/list_nodistributor")
-      .then((response) => {
-        const sortedDocuments = response.data.documents.sort(
-          (a, b) => new Date(b.uploaded_at) - new Date(a.uploaded_at)
-        );
-        setDocuments(sortedDocuments); // Ensure documents are sorted from newest to oldest
-      })
-      .catch((error) => console.error("Error fetching documents:", error));
+  const token = localStorage.getItem('token'); // adjust key as needed
+  const authHeaders = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
-    // Fetch distributors
-    axios
-      .get("http://localhost:3000/users/distributors")
-      .then((response) => setDistributors(response.data))
-      .catch((error) => console.error("Error fetching distributors:", error));
+  // Fetch documents without a distributor assigned
+  axios
+    .get(
+      "http://localhost:3000/documents/list_nodistributor",
+      authHeaders
+    )
+    .then((response) => {
+      const sortedDocuments = response.data.documents.sort(
+        (a, b) =>
+          new Date(b.uploaded_at) - new Date(a.uploaded_at)
+      );
+      setDocuments(sortedDocuments); // sorted newest → oldest
+    })
+    .catch((error) =>
+      console.error("Error fetching documents:", error)
+    );
 
-    // Fetch certificates
-    axios
-      .get("http://localhost:3000/certificates")
-      .then((response) => setCertificates(response.data))
-      .catch((error) => console.error("Error fetching certificates:", error));
+  // Fetch distributors
+  axios
+    .get("http://localhost:3000/users/distributors", authHeaders)
+    .then((response) => setDistributors(response.data))
+    .catch((error) =>
+      console.error("Error fetching distributors:", error)
+    );
 
-    // Fetch users
-    axios
-      .get("http://localhost:3000/users/register")
-      .then((response) => setUsers(response.data))
-      .catch((error) => console.error("Error fetching users:", error));
-  }, []);
+  // Fetch certificates
+  axios
+    .get("http://localhost:3000/certificates", authHeaders)
+    .then((response) => setCertificates(response.data))
+    .catch((error) =>
+      console.error("Error fetching certificates:", error)
+    );
+
+  // Fetch users
+  axios
+    .get("http://localhost:3000/users/register", authHeaders)
+    .then((response) => setUsers(response.data))
+    .catch((error) =>
+      console.error("Error fetching users:", error)
+    );
+}, []);
 
   // Handle status filter change
   const handleStatusFilterChange = (e) => {
@@ -57,7 +113,8 @@ const VerifyDocuments = () => {
     try {
       await axios.put(
         `http://localhost:3000/documents/update-status/${documentId}`,
-        {
+       authHeaders
+        , {
           status: newStatus,
         }
       );
@@ -133,7 +190,7 @@ const VerifyDocuments = () => {
     }
     try {
       const response = await axios.get(
-        `http://localhost:3000/certificates/${certificateId}`
+        `http://localhost:3000/certificates/${certificateId}`,authHeaders
       );
       if (response.data && response.data.file_url) {
         window.open(response.data.file_url, "_blank");

@@ -22,16 +22,23 @@ const Apply = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [priceLoading, setPriceLoading] = useState(false);
   const [errors, setErrors] = useState({});
-  
+
   const location = useLocation();
   const { categoryId, categoryName, subcategoryId, subcategoryName } =
     location.state || {};
-    
+
   const [fieldNames, setFieldNames] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  
+
+
+  const authHeaders = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   const [userData, setUserData] = useState({
     user_id: "",
     name: "",
@@ -101,7 +108,7 @@ const Apply = () => {
       const response = await axios.get(
         `${API}/prices/${formData.category_id}/${formData.subcategory_id}`
       );
-      
+
       if (response.data && response.data.amount) {
         setServicePrice(Number(response.data.amount));
       } else if (response.data && response.data.price) {
@@ -112,18 +119,18 @@ const Apply = () => {
       }
     } catch (error) {
       console.error("Error fetching service price:", error);
-      
+
       // Fallback: try to get all prices and filter
       try {
         const fallbackResponse = await axios.get(`${API}/prices`);
         const prices = fallbackResponse.data;
-        
+
         const priceRecord = prices.find(
           (p) =>
             Number(p.category_id) === Number(formData.category_id) &&
             Number(p.subcategory_id) === Number(formData.subcategory_id)
         );
-        
+
         if (priceRecord) {
           setServicePrice(Number(priceRecord.amount) || Number(priceRecord.price) || 0);
         } else {
@@ -413,6 +420,7 @@ const Apply = () => {
       const response = await axios.post(
         `${API}/documents/upload`,
         formDataToSend,
+        authHeaders,
         {
           headers: { "Content-Type": "multipart/form-data" },
           timeout: 60000,
@@ -627,17 +635,16 @@ const Apply = () => {
             <button
               type="submit"
               disabled={isSubmitting || priceLoading || servicePrice <= 0}
-              className={`w-2/5 ${
-                isSubmitting || priceLoading || servicePrice <= 0
-                  ? 'bg-gray-400 cursor-not-allowed' 
+              className={`w-2/5 ${isSubmitting || priceLoading || servicePrice <= 0
+                  ? 'bg-gray-400 cursor-not-allowed'
                   : 'bg-orange-600 hover:bg-orange-700'
-              } text-white font-bold p-3 rounded-lg shadow-lg transition-all text-lg`}
+                } text-white font-bold p-3 rounded-lg shadow-lg transition-all text-lg`}
             >
-              {isSubmitting 
-                ? 'Processing...' 
-                : priceLoading 
-                ? 'Loading Price...'
-                : `Submit And Pay (₹${servicePrice})`
+              {isSubmitting
+                ? 'Processing...'
+                : priceLoading
+                  ? 'Loading Price...'
+                  : `Submit And Pay (₹${servicePrice})`
               }
             </button>
           </div>

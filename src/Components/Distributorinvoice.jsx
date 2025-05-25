@@ -287,7 +287,7 @@ const InvoicePage = () => {
       await axios.put(
         `http://localhost:3000/documents/update-status/${documentId}`,
         payload,
-        { timeout: 30000 }
+        { timeout: 30000, headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
       Swal.close();
       Swal.fire("Success", "Status updated!", "success").then(() =>
