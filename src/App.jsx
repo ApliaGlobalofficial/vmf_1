@@ -98,6 +98,7 @@ import WalletHistoryC from "./Components/WalletHistoryC";
 import RequestAmount from "./Components/RequestAmount";
 import RequestedMoney from "./Components/RequestedMoney";
 import RequestHistory from "./Components/RequestHistory";
+import SendMoney from "./Components/SendMoney";
 function App() {
   return (
     <Router>
@@ -372,6 +373,14 @@ function App() {
           element={
             <Admindashboard>
               <RequestedMoney />
+            </Admindashboard>
+          }
+        />
+        <Route
+          path="/send-money/:requestId"
+          element={
+            <Admindashboard>
+              <SendMoney />
             </Admindashboard>
           }
         />
@@ -700,6 +709,7 @@ function App() {
             </Distributordashboard>
           }
         />
+        
         <Route
           path="/RequestHistory"
           element={
