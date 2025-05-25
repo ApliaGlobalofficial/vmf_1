@@ -235,6 +235,11 @@ const Sidebar = ({ onNavigate }) => {
                 label: "Request Amount",
                 path: "/RequestAmount",
               },
+              {
+                icon: <FaWallet />,
+                label: "Request Amount History",
+                path: "/RequestHistory",
+              },
             ].map((item, index) => (
               <li
                 key={index}

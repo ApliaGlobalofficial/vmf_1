@@ -66,6 +66,14 @@ const InvoicePage = () => {
     setShowPreview(false);
   };
 
+  const token = localStorage.getItem("token");
+
+
+  const authHeaders = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   // --- Upload receipt ---
   const handleUploadReceipt = async () => {
     if (!selectedReceiptFile) {
@@ -96,12 +104,12 @@ const InvoicePage = () => {
       await axios.post(
         `http://localhost:3000/documents/upload-receipt/${documentId}`,
         form,
-        { headers: { "Content-Type": "multipart/form-data" }, timeout: 30000 }
+        { headers: { "Content-Type": "multipart/form-data" }, timeout: 30000 , ...authHeaders}
       );
       await axios.put(
         `http://localhost:3000/documents/update-status/${documentId}`,
         { status: "Sent" },
-        { timeout: 30000 }
+        { timeout: 30000 ,  ...authHeaders }
       );
       Swal.close();
       Swal.fire("Success", "Receipt uploaded!", "success").then(() =>
@@ -161,14 +169,14 @@ const InvoicePage = () => {
       // 1️⃣ Upload the cert file
       await axios.post("http://localhost:3000/certificates/upload", form, {
         headers: { "Content-Type": "multipart/form-data" },
-        timeout: 30000,
+        timeout: 30000, authHeaders
       });
 
       // 2️⃣ THEN update the document status
       await axios.put(
         `http://localhost:3000/documents/update-status/${documentId}`,
         { status: "Uploaded" },
-        { timeout: 30000 }
+        { timeout: 30000 ,  ...authHeaders }
       );
 
       Swal.close();
@@ -206,7 +214,7 @@ const InvoicePage = () => {
         `http://localhost:3000/download/all/${documentId}`,
         {
           responseType: "blob",
-          timeout: 120000,
+          timeout: 120000, authHeaders,
           onDownloadProgress: (e) => {
             if (e.total) {
               const pct = Math.round((e.loaded * 100) / e.total);

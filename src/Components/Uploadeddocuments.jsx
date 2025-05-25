@@ -22,11 +22,18 @@ const Uploadeddocuments = () => {
   const [isAdding, setIsAdding] = useState(false);
 
   const navigate = useNavigate();
+const token = localStorage.getItem("token");
 
+
+  const authHeaders = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   useEffect(() => {
     // Fetch assigned documents from the new API
     axios
-      .get(`http://localhost:3000/documents/list`)
+      .get(`http://localhost:3000/documents/list`, authHeaders)
       .then((response) => {
         const sortedDocuments = response.data.documents.sort(
           (a, b) => new Date(b.uploaded_at) - new Date(a.uploaded_at)
@@ -41,19 +48,19 @@ const Uploadeddocuments = () => {
 
     // Fetch distributors
     axios
-      .get(`http://localhost:3000/users/distributors`)
+      .get(`http://localhost:3000/users/distributors`, authHeaders)
       .then((response) => setDistributors(response.data))
       .catch((error) => console.error("Error fetching distributors:", error));
 
     // Fetch certificates
     axios
-      .get("http://localhost:3000/certificates")
+      .get("http://localhost:3000/certificates", authHeaders)
       .then((response) => setCertificates(response.data))
       .catch((error) => console.error("Error fetching certificates:", error));
 
     // Fetch users
     axios
-      .get("http://localhost:3000/users/register")
+      .get("http://localhost:3000/users/register", authHeaders)
       .then((response) => setUsers(response.data))
       .catch((error) => console.error("Error fetching users:", error));
   }, []);
@@ -114,7 +121,7 @@ const Uploadeddocuments = () => {
       const response = await axios.put(
         `http://localhost:3000/documents/update-status/${documentId}`,
         { status: newStatus },
-        { timeout: 30000 } // Set timeout to 30 seconds
+        { timeout: 30000  } // Set timeout to 30 seconds
       );
 
       // Log the response for debugging

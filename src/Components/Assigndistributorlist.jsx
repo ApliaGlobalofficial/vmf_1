@@ -18,10 +18,17 @@ const AssignedDistributorsList = () => {
   const [users, setUsers] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
   const navigate = useNavigate();
+const token = localStorage.getItem("token");
 
+
+  const authHeaders = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/documents/assigned-list`)
+      .get(`http://localhost:3000/documents/assigned-list`, authHeaders)
       .then((response) => {
         console.log("API Response:", response.data); // Log full response
         const sortedDocuments = response.data.documents.sort(
@@ -35,19 +42,19 @@ const AssignedDistributorsList = () => {
 
     // Fetch distributors
     axios
-      .get(`http://localhost:3000/users/distributors`)
+      .get(`http://localhost:3000/users/distributors`, authHeaders)
       .then((response) => setDistributors(response.data))
       .catch((error) => console.error("Error fetching distributors:", error));
 
     // Fetch certificates
     axios
-      .get("http://localhost:3000/certificates")
+      .get("http://localhost:3000/certificates", authHeaders)
       .then((response) => setCertificates(response.data))
       .catch((error) => console.error("Error fetching certificates:", error));
 
     // Fetch users
     axios
-      .get("http://localhost:3000/users/register")
+      .get("http://localhost:3000/users/register" , authHeaders)
       .then((response) => setUsers(response.data))
       .catch((error) => console.error("Error fetching users:", error));
   }, []);

@@ -11,7 +11,14 @@ const Dsentlist = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
+const token = localStorage.getItem("token");
 
+
+  const authHeaders = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   // Decode token and extract user ID
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -39,7 +46,7 @@ const Dsentlist = () => {
   const fetchDocuments = async (distributorId) => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/documents/list/${distributorId}`
+        `http://localhost:3000/documents/list/${distributorId}` , authHeaders
       );
 
       // Filter documents with status "Sent" and sort by `uploaded_at` in descending order
@@ -58,7 +65,7 @@ const Dsentlist = () => {
     try {
       console.log("Fetching certificates...");
       const response = await axios.get(
-        "http://localhost:3000/certificates"
+        "http://localhost:3000/certificates" , authHeaders
       ); // Adjust URL if needed
       console.log("Certificates API Response:", response.data);
       setCertificates(response.data);
@@ -88,7 +95,7 @@ const Dsentlist = () => {
         `Fetching certificate for Certificate ID: ${certificate.certificate_id}`
       );
       const response = await axios.get(
-        `http://localhost:3000/certificates/${certificate.certificate_id}`
+        `http://localhost:3000/certificates/${certificate.certificate_id}`, authHeaders
       );
       console.log("View Certificate API Response:", response.data);
 
@@ -146,7 +153,7 @@ const Dsentlist = () => {
   const handleDownloadCertificate = async (documentId, name) => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/download-certificate/${documentId}`,
+        `http://localhost:3000/download-certificate/${documentId}`, authHeaders,
         {
           responseType: "blob", // Important to handle file downloads
         }

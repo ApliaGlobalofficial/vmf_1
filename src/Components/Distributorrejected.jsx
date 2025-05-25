@@ -19,11 +19,18 @@ const Distributorrejected = () => {
   const [isAdding, setIsAdding] = useState(false);
 
   const navigate = useNavigate();
+const token = localStorage.getItem("token");
 
+
+  const authHeaders = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   useEffect(() => {
     // Fetch assigned documents from the new API
     axios
-      .get(`http://localhost:3000/documents/assigned-list`)
+      .get(`http://localhost:3000/documents/assigned-list`, authHeaders)
       .then((response) => {
         const sortedDocuments = response.data.documents.sort(
           (a, b) => new Date(b.uploaded_at) - new Date(a.uploaded_at)
@@ -38,19 +45,19 @@ const Distributorrejected = () => {
 
     // Fetch distributors
     axios
-      .get(`http://localhost:3000/users/distributors`)
+      .get(`http://localhost:3000/users/distributors`, authHeaders)
       .then((response) => setDistributors(response.data))
       .catch((error) => console.error("Error fetching distributors:", error));
 
     // Fetch certificates
     axios
-      .get("http://localhost:3000/certificates")
+      .get("http://localhost:3000/certificates", authHeaders)
       .then((response) => setCertificates(response.data))
       .catch((error) => console.error("Error fetching certificates:", error));
 
     // Fetch users
     axios
-      .get("http://localhost:3000/users/register")
+      .get("http://localhost:3000/users/register" , authHeaders)
       .then((response) => setUsers(response.data))
       .catch((error) => console.error("Error fetching users:", error));
   }, []);
@@ -105,7 +112,7 @@ const Distributorrejected = () => {
       const response = await axios.put(
         `http://localhost:3000/documents/update-status/${documentId}`,
         { status: newStatus },
-        { timeout: 30000 } // Set timeout to 30 seconds
+        { timeout: 30000 , authHeaders } // Set timeout to 30 seconds
       );
 
       // Log the response for debugging
@@ -206,7 +213,7 @@ const Distributorrejected = () => {
     }
     try {
       const response = await axios.get(
-        `http://localhost:3000/certificates/${certificateId}`
+        `http://localhost:3000/certificates/${certificateId}`, authHeaders
       );
       if (response.data && response.data.file_url) {
         window.open(response.data.file_url, "_blank");
@@ -230,7 +237,7 @@ const Distributorrejected = () => {
 
       // Make the API call to download the file
       const response = await axios.get(
-        `http://localhost:3000/download-certificate/${documentId}`,
+        `http://localhost:3000/download-certificate/${documentId}`, authHeaders,
         {
           responseType: "blob", // Important to handle file downloads
         }
@@ -285,7 +292,7 @@ const Distributorrejected = () => {
       try {
         // Call the API to update the status to "Rejected" with the rejection reason
         await axios.put(
-          `http://localhost:3000/documents/update-status/${documentId}`,
+          `http://localhost:3000/documents/update-status/${documentId}`, authHeaders,
           {
             status: "Rejected",
             rejectionReason,

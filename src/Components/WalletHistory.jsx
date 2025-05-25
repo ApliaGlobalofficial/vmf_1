@@ -10,6 +10,14 @@ export default function WalletHistory() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
+  const token = localStorage.getItem("token");
+
+
+  const authHeaders = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   useEffect(() => {
     const fetchWalletHistory = async () => {
       setLoading(true);
@@ -19,7 +27,7 @@ export default function WalletHistory() {
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
         const { data: txs = [] } = await axios.get(
-          `${API}/wallet/transactions`,
+          `${API}/wallet/transactions`, authHeaders,
           { headers }
         );
         setWalletHistory(txs);

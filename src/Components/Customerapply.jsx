@@ -20,7 +20,14 @@ const CustomerApply = () => {
   const [statusFilter, setStatusFilter] = useState("");
   const [certificates, setCertificates] = useState([]);
   const navigate = useNavigate();
+const token = localStorage.getItem("token");
 
+
+  const authHeaders = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   // Fetch user ID from token
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -46,7 +53,7 @@ const CustomerApply = () => {
       "Uploaded",
     ];
     axios
-      .get("http://localhost:3000/documents/list")
+      .get("http://localhost:3000/documents/list" , authHeaders)
       .then((response) => {
         const allDocs = response.data.documents;
         const filtered = allDocs
@@ -60,7 +67,7 @@ const CustomerApply = () => {
       .catch((err) => console.error("Error fetching documents:", err));
 
     axios
-      .get("http://localhost:3000/certificates")
+      .get("http://localhost:3000/certificates" , authHeaders)
       .then((res) => setCertificates(res.data))
       .catch((err) => console.error("Error fetching certificates:", err));
   }, [userId]);
@@ -123,7 +130,7 @@ const CustomerApply = () => {
 
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/certificates/${cert.certificate_id}`
+        `http://localhost:3000/certificates/${cert.certificate_id}` , authHeaders
       );
       if (data.file_url) {
         await downloadFileAsPdf(data.file_url, documentName);
@@ -144,7 +151,7 @@ const CustomerApply = () => {
     }
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/certificates/${cert.certificate_id}`
+        `http://localhost:3000/certificates/${cert.certificate_id}`, authHeaders
       );
       if (data.file_url) window.open(data.file_url, "_blank");
       else throw new Error("No file URL");

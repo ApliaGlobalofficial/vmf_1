@@ -19,11 +19,19 @@ const Rejecteddocuments = () => {
   const [isAdding, setIsAdding] = useState(false);
 
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+
+  const authHeaders = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
   useEffect(() => {
     // Fetch assigned documents from the new API
     axios
-      .get(`http://localhost:3000/documents/list`)
+      .get(`http://localhost:3000/documents/list`, authHeaders)
       .then((response) => {
         const sortedDocuments = response.data.documents.sort(
           (a, b) => new Date(b.uploaded_at) - new Date(a.uploaded_at)
@@ -36,19 +44,19 @@ const Rejecteddocuments = () => {
 
     // Fetch distributors
     axios
-      .get(`http://localhost:3000/users/distributors`)
+      .get(`http://localhost:3000/users/distributors`, authHeaders)
       .then((response) => setDistributors(response.data))
       .catch((error) => console.error("Error fetching distributors:", error));
 
     // Fetch certificates
     axios
-      .get("http://localhost:3000/certificates")
+      .get("http://localhost:3000/certificates", authHeaders)
       .then((response) => setCertificates(response.data))
       .catch((error) => console.error("Error fetching certificates:", error));
 
     // Fetch users
     axios
-      .get("http://localhost:3000/users/register")
+      .get("http://localhost:3000/users/register", authHeaders)
       .then((response) => setUsers(response.data))
       .catch((error) => console.error("Error fetching users:", error));
   }, []);
@@ -161,6 +169,7 @@ const Rejecteddocuments = () => {
         {
           responseType: "blob", // Important to handle file downloads
         }
+        , authHeaders,
       );
 
       console.log("API Response:", response); // Debugging
@@ -212,7 +221,8 @@ const Rejecteddocuments = () => {
             formData,
             {
               headers: {
-                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${token}`,
+                // Let Axios automatically set Content-Type for FormData
               },
             }
           );
@@ -321,9 +331,8 @@ const Rejecteddocuments = () => {
               {filteredDocuments.map((doc, index) => (
                 <tr
                   key={doc.document_id}
-                  className={`border-t ${
-                    index % 2 === 0 ? "bg-white" : "bg-white"
-                  } hover:bg-gray-100`}
+                  className={`border-t ${index % 2 === 0 ? "bg-white" : "bg-white"
+                    } hover:bg-gray-100`}
                 >
                   <td className="border p-2 text-center">{index + 1}</td>
                   <td className="border p-2 text-center">
@@ -394,15 +403,14 @@ const Rejecteddocuments = () => {
                     <div className="flex flex-col gap-1">
                       {/* Status Badge */}
                       <span
-                        className={`px-3 py-1 rounded-full text-white text-xs ${
-                          doc.status === "Approved"
+                        className={`px-3 py-1 rounded-full text-white text-xs ${doc.status === "Approved"
                             ? "bg-green-500"
                             : doc.status === "Rejected"
-                            ? "bg-red-500"
-                            : doc.status === "Pending"
-                            ? "bg-yellow-500"
-                            : "bg-blue-500"
-                        }`}
+                              ? "bg-red-500"
+                              : doc.status === "Pending"
+                                ? "bg-yellow-500"
+                                : "bg-blue-500"
+                          }`}
                       >
                         {doc.status}
                       </span>

@@ -97,6 +97,7 @@ import WalletHistoryD from "./Components/WalletHistoryD";
 import WalletHistoryC from "./Components/WalletHistoryC";
 import RequestAmount from "./Components/RequestAmount";
 import RequestedMoney from "./Components/RequestedMoney";
+import RequestHistory from "./Components/RequestHistory";
 function App() {
   return (
     <Router>
@@ -696,6 +697,14 @@ function App() {
           element={
             <Distributordashboard>
               <RequestAmount />
+            </Distributordashboard>
+          }
+        />
+        <Route
+          path="/RequestHistory"
+          element={
+            <Distributordashboard>
+              <RequestHistory />
             </Distributordashboard>
           }
         />

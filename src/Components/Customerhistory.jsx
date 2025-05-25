@@ -17,7 +17,14 @@ const CustomerHistory = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isAdding, setIsAdding] = useState(false);
   const navigate = useNavigate();
+const token = localStorage.getItem("token");
 
+
+  const authHeaders = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -33,7 +40,7 @@ const CustomerHistory = () => {
   useEffect(() => {
     if (userId) {
       axios
-        .get(` http://localhost:3000/documents/list`)
+        .get(` http://localhost:3000/documents/list`, authHeaders)
         .then((response) => {
           const allDocuments = response.data.documents;
           // Filter documents where status is "Completed"
@@ -47,7 +54,7 @@ const CustomerHistory = () => {
         .catch((error) => console.error("Error fetching documents:", error));
 
       axios
-        .get(" http://localhost:3000/certificates")
+        .get(" http://localhost:3000/certificates", authHeaders)
         .then((response) => setCertificates(response.data))
         .catch((error) => console.error("Error fetching certificates:", error));
     }
@@ -134,7 +141,7 @@ const CustomerHistory = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:3000/certificates/${certificateId}`
+        `http://localhost:3000/certificates/${certificateId}` , authHeaders
       );
 
       if (response.data && response.data.file_url) {
@@ -200,7 +207,7 @@ const CustomerHistory = () => {
   const handleDownloadCertificate = async (documentId, name) => {
     try {
       const response = await axios.get(
-        ` http://localhost:3000/download-certificate/${documentId}`,
+        ` http://localhost:3000/download-certificate/${documentId}`, authHeaders,
         {
           responseType: "blob", // Important to handle file downloads
         }
