@@ -66,7 +66,7 @@ const RegisterDocument = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/users/update/${id}`,
+        `http://3.6.61.72:3000/users/update/${id}`,
         {
           method: "PUT",
           body: formDataObj,

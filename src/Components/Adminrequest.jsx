@@ -20,7 +20,7 @@ const ErrorRequests = () => {
   const fetchErrorRequests = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/request-errors"
+        "http://3.6.61.72:3000/request-errors"
       );
       setErrorRequests(response.data);
     } catch (error) {
@@ -31,7 +31,7 @@ const ErrorRequests = () => {
   const fetchCertificates = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/certificates"
+        "http://3.6.61.72:3000/certificates"
       );
       setCertificates(response.data);
     } catch (error) {
@@ -54,7 +54,7 @@ const ErrorRequests = () => {
     }
     try {
       const response = await axios.get(
-        `http://localhost:3000/certificates/${certificateId}`
+        `http://3.6.61.72:3000/certificates/${certificateId}`
       );
       if (response.data && response.data.file_url) {
         window.open(response.data.file_url, "_blank");
@@ -110,7 +110,7 @@ const ErrorRequests = () => {
 
     try {
       await axios.patch(
-        `http://localhost:3000/request-errors/update-status/${requestId}`,
+        `http://3.6.61.72:3000/request-errors/update-status/${requestId}`,
         {
           request_status: newStatus,
           rejectionReason,

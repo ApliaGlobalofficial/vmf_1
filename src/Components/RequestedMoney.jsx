@@ -19,7 +19,7 @@
 //       return;
 //     }
 
-//     fetch("http://localhost:3000/wallet_request", {
+//     fetch("http://3.6.61.72:3000/wallet_request", {
 //       headers: {
 //         "Content-Type": "application/json",
 //         Authorization: `Bearer ${token}`,
@@ -50,7 +50,7 @@
 //     const token = localStorage.getItem("token");
 
 //     try {
-//       const res = await fetch(`http://localhost:3000/wallet_request/${id}`, {
+//       const res = await fetch(`http://3.6.61.72:3000/wallet_request/${id}`, {
 //         method: "PATCH",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -178,7 +178,7 @@ const RequestedMoney = () => {
       return;
     }
 
-    fetch("http://localhost:3000/wallet_request", {
+    fetch("http://3.6.61.72:3000/wallet_request", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

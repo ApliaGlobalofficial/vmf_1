@@ -28,7 +28,7 @@ const Register = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/users/register",
+        "http://3.6.61.72:3000/users/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

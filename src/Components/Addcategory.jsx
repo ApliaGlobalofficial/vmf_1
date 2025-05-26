@@ -12,7 +12,7 @@ const AddCategory = () => {
   const [isAdding, setIsAdding] = useState(false);
   const navigate = useNavigate();
 
-  const apiUrl = "http://localhost:3000/categories";
+  const apiUrl = "http://3.6.61.72:3000/categories";
 
   useEffect(() => {
     fetchCategories();

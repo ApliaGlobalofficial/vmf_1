@@ -144,13 +144,13 @@ const Edashinner = () => {
       try {
         // Create an array of promises for all API calls
         const promises = [
-          fetch("http://localhost:3000/statistics/counts").then((res) =>
+          fetch("http://3.6.61.72:3000/statistics/counts").then((res) =>
             res.json()
           ),
-          axios.get("http://localhost:3000/categories"),
-          axios.get("http://localhost:3000/subcategories"),
-          axios.get("http://localhost:3000/statistics/cscounts"),
-          axios.get("http://localhost:3000/required-documents"),
+          axios.get("http://3.6.61.72:3000/categories"),
+          axios.get("http://3.6.61.72:3000/subcategories"),
+          axios.get("http://3.6.61.72:3000/statistics/cscounts"),
+          axios.get("http://3.6.61.72:3000/required-documents"),
         ];
 
         // Wait for all promises to resolve

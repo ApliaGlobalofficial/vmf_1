@@ -10,7 +10,7 @@ const HeaderTable = () => {
   const [editingItem, setEditingItem] = useState(null);
 
   const navigate = useNavigate();
-  const apiUrl = "http://localhost:3000/header";
+  const apiUrl = "http://3.6.61.72:3000/header";
 
   useEffect(() => {
     fetchHeaders();

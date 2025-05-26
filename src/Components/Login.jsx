@@ -11,14 +11,14 @@ const Login = () => {
   const [subcategories, setSubcategories] = useState({});
   const navigate = useNavigate();
   // src/pages/Login.jsx
-  const SMS_URL = "http://localhost:3000/sms/send";
+  const SMS_URL = "http://3.6.61.72:3000/sms/send";
   const SMS_SENDER = "918308178738"; // your LiveOne “from” number
 
   // Fetch categories
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:3000/categories");
+        const response = await fetch("http://3.6.61.72:3000/categories");
         if (!response.ok) throw new Error("Failed to fetch categories");
         setCategories(await response.json());
       } catch (error) {
@@ -35,7 +35,7 @@ const Login = () => {
       try {
         for (const cat of categories) {
           const resp = await fetch(
-            `http://localhost:3000/subcategories/category/${cat.category_id}`
+            `http://3.6.61.72:3000/subcategories/category/${cat.category_id}`
           );
           result[cat.category_id] = resp.ok ? await resp.json() : [];
         }
@@ -61,7 +61,7 @@ const Login = () => {
     e.preventDefault();
     try {
       // ① Authenticate
-      const resp = await fetch("http://localhost:3000/users/login", {
+      const resp = await fetch("http://3.6.61.72:3000/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -117,7 +117,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const resp = await fetch(
-        "http://localhost:3000/users/forgot-password",
+        "http://3.6.61.72:3000/users/forgot-password",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

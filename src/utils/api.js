@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "/api", // Vite proxy → http://localhost:3000/
+  baseURL: "/api", // Vite proxy → http://3.6.61.72:3000/
   headers: {
     "Content-Type": "application/json",
   },

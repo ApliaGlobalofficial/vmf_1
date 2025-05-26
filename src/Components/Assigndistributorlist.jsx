@@ -28,7 +28,7 @@ const token = localStorage.getItem("token");
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/documents/assigned-list`, authHeaders)
+      .get(`http://3.6.61.72:3000/documents/assigned-list`, authHeaders)
       .then((response) => {
         console.log("API Response:", response.data); // Log full response
         const sortedDocuments = response.data.documents.sort(
@@ -42,19 +42,19 @@ const token = localStorage.getItem("token");
 
     // Fetch distributors
     axios
-      .get(`http://localhost:3000/users/distributors`, authHeaders)
+      .get(`http://3.6.61.72:3000/users/distributors`, authHeaders)
       .then((response) => setDistributors(response.data))
       .catch((error) => console.error("Error fetching distributors:", error));
 
     // Fetch certificates
     axios
-      .get("http://localhost:3000/certificates", authHeaders)
+      .get("http://3.6.61.72:3000/certificates", authHeaders)
       .then((response) => setCertificates(response.data))
       .catch((error) => console.error("Error fetching certificates:", error));
 
     // Fetch users
     axios
-      .get("http://localhost:3000/users/register" , authHeaders)
+      .get("http://3.6.61.72:3000/users/register" , authHeaders)
       .then((response) => setUsers(response.data))
       .catch((error) => console.error("Error fetching users:", error));
   }, []);
@@ -71,7 +71,7 @@ const token = localStorage.getItem("token");
   const handleUpdateStatus = async (documentId, newStatus) => {
     try {
       await axios.put(
-        `http://localhost:3000/documents/update-status/${documentId}`,
+        `http://3.6.61.72:3000/documents/update-status/${documentId}`,
         {
           status: newStatus,
           status_updated_at: new Date().toISOString(), // Add timestamp
@@ -148,7 +148,7 @@ const token = localStorage.getItem("token");
     }
     try {
       const response = await axios.get(
-        `http://localhost:3000/certificates/${certificateId}`
+        `http://3.6.61.72:3000/certificates/${certificateId}`
       );
       if (response.data && response.data.file_url) {
         window.open(response.data.file_url, "_blank");
@@ -172,7 +172,7 @@ const token = localStorage.getItem("token");
 
       // Make the API call to download the file
       const response = await axios.get(
-        `http://localhost:3000/download-certificate/${documentId}`,
+        `http://3.6.61.72:3000/download-certificate/${documentId}`,
         {
           responseType: "blob", // Important to handle file downloads
         }

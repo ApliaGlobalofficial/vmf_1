@@ -17,7 +17,7 @@ const ContactInfoTable = () => {
     email: "",
     address: "",
   });
-  const apiUrl = "http://localhost:3000/contact-info"; // Replace with your actual backend API
+  const apiUrl = "http://3.6.61.72:3000/contact-info"; // Replace with your actual backend API
 
   useEffect(() => {
     fetchContactInfo();

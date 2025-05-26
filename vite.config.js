@@ -14,7 +14,7 @@ export default defineConfig({
     allowedHosts: ["mazedakhale.in"],
     proxy: {
       "/api": {
-        target: "http://localhost:3000",
+        target: "http://3.6.61.72:3000",
         changeOrigin: true,
         secure: false,
       },

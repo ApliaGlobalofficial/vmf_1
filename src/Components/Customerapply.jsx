@@ -53,7 +53,7 @@ const token = localStorage.getItem("token");
       "Uploaded",
     ];
     axios
-      .get("http://localhost:3000/documents/list" , authHeaders)
+      .get("http://3.6.61.72:3000/documents/list" , authHeaders)
       .then((response) => {
         const allDocs = response.data.documents;
         const filtered = allDocs
@@ -67,7 +67,7 @@ const token = localStorage.getItem("token");
       .catch((err) => console.error("Error fetching documents:", err));
 
     axios
-      .get("http://localhost:3000/certificates" , authHeaders)
+      .get("http://3.6.61.72:3000/certificates" , authHeaders)
       .then((res) => setCertificates(res.data))
       .catch((err) => console.error("Error fetching certificates:", err));
   }, [userId]);
@@ -130,7 +130,7 @@ const token = localStorage.getItem("token");
 
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/certificates/${cert.certificate_id}` , authHeaders
+        `http://3.6.61.72:3000/certificates/${cert.certificate_id}` , authHeaders
       );
       if (data.file_url) {
         await downloadFileAsPdf(data.file_url, documentName);
@@ -151,7 +151,7 @@ const token = localStorage.getItem("token");
     }
     try {
       const { data } = await axios.get(
-        `http://localhost:3000/certificates/${cert.certificate_id}`, authHeaders
+        `http://3.6.61.72:3000/certificates/${cert.certificate_id}`, authHeaders
       );
       if (data.file_url) window.open(data.file_url, "_blank");
       else throw new Error("No file URL");

@@ -56,7 +56,7 @@ export default function AddCertificateRequestPage() {
 
     try {
       const resp = await axios.post(
-        "http://localhost:3000/request-errors/create",
+        "http://3.6.61.72:3000/request-errors/create",
         formData
       );
       if (resp.status === 201 || resp.status === 200) {

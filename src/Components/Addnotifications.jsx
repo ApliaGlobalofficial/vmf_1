@@ -23,7 +23,7 @@ const NotificationManager = () => {
   const fetchNotifications = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/notifications"
+        "http://3.6.61.72:3000/notifications"
       ); // Adjust API URL as needed
       setNotifications(Array.isArray(response.data) ? response.data : []);
     } catch (err) {
@@ -49,7 +49,7 @@ const NotificationManager = () => {
         notification_date:
           newNotification.notification_date || new Date().toISOString(),
       };
-      await axios.post("http://localhost:3000/notifications", payload);
+      await axios.post("http://3.6.61.72:3000/notifications", payload);
       fetchNotifications();
       setIsModalOpen(false);
       setNewNotification({
@@ -94,7 +94,7 @@ const NotificationManager = () => {
 
       // 2. **API call runs in background, not blocking UI**
       axios
-        .delete(`http://localhost:3000/notifications/${id}`)
+        .delete(`http://3.6.61.72:3000/notifications/${id}`)
         .then(() => {
           fetchNotifications(); // Refresh list after deletion
         })
@@ -128,7 +128,7 @@ const NotificationManager = () => {
   const handleSaveEdit = async (id) => {
     try {
       await axios.put(
-        `http://localhost:3000/notifications/${id}`,
+        `http://3.6.61.72:3000/notifications/${id}`,
         editData
       );
       setEditingId(null);
@@ -143,7 +143,7 @@ const NotificationManager = () => {
     try {
       const newStatus = currentStatus === "Active" ? "Inactive" : "Active";
       await axios.patch(
-        `http://localhost:3000/notifications/status/${id}`,
+        `http://3.6.61.72:3000/notifications/status/${id}`,
         {
           notification_status: newStatus,
         }

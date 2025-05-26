@@ -11,7 +11,7 @@ const NewsTable = () => {
   const [editingItem, setEditingItem] = useState(null);
 
   const navigate = useNavigate();
-  const apiUrl = "http://localhost:3000/news";
+  const apiUrl = "http://3.6.61.72:3000/news";
 
   useEffect(() => {
     fetchNews();
