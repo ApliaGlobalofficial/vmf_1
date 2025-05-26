@@ -9,7 +9,7 @@ const TermsAndConditions = () => {
     const fetchTnC = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/privacy-policy/type/" +
+          "https://mazedakhale.in/api/privacy-policy/type/" +
             encodeURIComponent("Terms and Conditions")
         );
         const data = response.data;

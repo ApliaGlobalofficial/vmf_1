@@ -20,7 +20,7 @@ const ErrorRequests = () => {
   const fetchErrorRequests = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/request-errors"
+        "https://mazedakhale.in/api/request-errors"
       );
       setErrorRequests(response.data);
     } catch (error) {
@@ -31,7 +31,7 @@ const ErrorRequests = () => {
   const fetchCertificates = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/certificates"
+        "https://mazedakhale.in/api/certificates"
       );
       setCertificates(response.data);
     } catch (error) {
@@ -54,7 +54,7 @@ const ErrorRequests = () => {
     }
     try {
       const response = await axios.get(
-        `http://localhost:3000/certificates/${certificateId}`
+        `https://mazedakhale.in/api/certificates/${certificateId}`
       );
       if (response.data && response.data.file_url) {
         window.open(response.data.file_url, "_blank");
@@ -110,7 +110,7 @@ const ErrorRequests = () => {
 
     try {
       await axios.patch(
-        `http://localhost:3000/request-errors/update-status/${requestId}`,
+        `https://mazedakhale.in/api/request-errors/update-status/${requestId}`,
         {
           request_status: newStatus,
           rejectionReason,

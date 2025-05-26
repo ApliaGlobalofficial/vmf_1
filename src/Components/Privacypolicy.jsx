@@ -11,7 +11,7 @@ const PrivacyPolicy = () => {
       try {
         // Fetch only the "Privacy Policy" type
         const response = await axios.get(
-          "http://localhost:3000/privacy-policy/type/Privacy%20Policy"
+          "https://mazedakhale.in/api/privacy-policy/type/Privacy%20Policy"
         );
         const data = response.data;
 

@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-const SMS_URL = "http://localhost:3000/sms/send";
+const SMS_URL = "https://mazedakhale.in/api/sms/send";
 const SMS_SENDER = "918308178738"; // your LiveOne-registered “from” number
 
 const Uploadeddocuments = () => {
@@ -33,7 +33,7 @@ const token = localStorage.getItem("token");
   useEffect(() => {
     // Fetch assigned documents from the new API
     axios
-      .get(`http://localhost:3000/documents/list`, authHeaders)
+      .get(`https://mazedakhale.in/api/documents/list`, authHeaders)
       .then((response) => {
         const sortedDocuments = response.data.documents.sort(
           (a, b) => new Date(b.uploaded_at) - new Date(a.uploaded_at)
@@ -48,19 +48,19 @@ const token = localStorage.getItem("token");
 
     // Fetch distributors
     axios
-      .get(`http://localhost:3000/users/distributors`, authHeaders)
+      .get(`https://mazedakhale.in/api/users/distributors`, authHeaders)
       .then((response) => setDistributors(response.data))
       .catch((error) => console.error("Error fetching distributors:", error));
 
     // Fetch certificates
     axios
-      .get("http://localhost:3000/certificates", authHeaders)
+      .get("https://mazedakhale.in/api/certificates", authHeaders)
       .then((response) => setCertificates(response.data))
       .catch((error) => console.error("Error fetching certificates:", error));
 
     // Fetch users
     axios
-      .get("http://localhost:3000/users/register", authHeaders)
+      .get("https://mazedakhale.in/api/users/register", authHeaders)
       .then((response) => setUsers(response.data))
       .catch((error) => console.error("Error fetching users:", error));
   }, []);
@@ -119,7 +119,7 @@ const token = localStorage.getItem("token");
 
       // Make the API call to update the status with a longer timeout
       const response = await axios.put(
-        `http://localhost:3000/documents/update-status/${documentId}`,
+        `https://mazedakhale.in/api/documents/update-status/${documentId}`,
         { status: newStatus },
         { timeout: 30000  } // Set timeout to 30 seconds
       );
@@ -246,7 +246,7 @@ const token = localStorage.getItem("token");
     }
     try {
       const response = await axios.get(
-        `http://localhost:3000/certificates/${certificateId}`
+        `https://mazedakhale.in/api/certificates/${certificateId}`
       );
       if (response.data && response.data.file_url) {
         window.open(response.data.file_url, "_blank");
@@ -270,7 +270,7 @@ const token = localStorage.getItem("token");
 
       // Make the API call to download the file
       const response = await axios.get(
-        `http://localhost:3000/download-certificate/${documentId}`,
+        `https://mazedakhale.in/api/download-certificate/${documentId}`,
         {
           responseType: "blob", // Important to handle file downloads
         }
@@ -325,7 +325,7 @@ const token = localStorage.getItem("token");
       try {
         // Call the API to update the status to "Rejected" with the rejection reason
         await axios.put(
-          `http://localhost:3000/documents/update-status/${documentId}`,
+          `https://mazedakhale.in/api/documents/update-status/${documentId}`,
           {
             status: "Rejected",
             rejectionReason,

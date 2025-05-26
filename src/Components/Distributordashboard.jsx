@@ -287,7 +287,7 @@ const Distributordashboard = ({ children }) => {
 
       try {
         const authHeaders = { Authorization: `Bearer ${token}` };
-        const res = await axios.get("http://localhost:3000/wallet", {
+        const res = await axios.get("https://mazedakhale.in/api/wallet", {
           headers: authHeaders,
         });
         const num = parseFloat(res.data.balance);

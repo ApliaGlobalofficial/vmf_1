@@ -50,7 +50,7 @@ const FeedbackD = () => {
     }
 
     try {
-      await axios.post("http://localhost:3000/feedback", {
+      await axios.post("https://mazedakhale.in/api/feedback", {
         comment,
         rating,
         user_id: storedUser.user_id, // ✅ Extract user_id correctly

@@ -78,7 +78,7 @@ const Register = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/users/register",
+        "https://mazedakhale.in/api/users/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

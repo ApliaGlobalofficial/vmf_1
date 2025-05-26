@@ -11,7 +11,7 @@ const UserTable = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/users/register"
+          "https://mazedakhale.in/api/users/register"
         );
         const distributors = response.data.filter(
           (user) => user.role === "Customer"
