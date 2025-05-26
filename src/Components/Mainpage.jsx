@@ -254,7 +254,7 @@ const Mainpage = () => {
       <section className="container mx-auto mt-8 px-4">
         <div className="flex gap-6">
           <div className="w-3/5 grid grid-cols-2 gap-6">
-            {documentTypes.slice(0, 4).map((doc) => {
+            {documentTypes?.slice(0, 4).map((doc) => {
               const Icon = iconMapping[doc.doc_type_name] || FaCertificate;
               return (
                 <div
@@ -311,7 +311,7 @@ const Mainpage = () => {
 
         {documentTypes.length > 4 && (
           <div className="grid grid-cols-4 gap-6 mt-6">
-            {documentTypes.slice(4).map((doc) => {
+            {documentTypes?.slice(4).map((doc) => {
               const Icon = iconMapping[doc.doc_type_name] || FaCertificate;
               return (
                 <div
