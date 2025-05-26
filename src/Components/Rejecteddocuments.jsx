@@ -29,7 +29,7 @@ const token = localStorage.getItem("token");
   useEffect(() => {
     // Fetch assigned documents from the new API
     axios
-      .get(`https://mazedakhale.in/api/documents/assigned-list`, authHeaders)
+      .get(`http://localhost:3000/documents/assigned-list`, authHeaders)
       .then((response) => {
         const sortedDocuments = response.data.documents.sort(
           (a, b) => new Date(b.uploaded_at) - new Date(a.uploaded_at)
@@ -42,19 +42,19 @@ const token = localStorage.getItem("token");
 
     // Fetch distributors
     axios
-      .get(`https://mazedakhale.in/api/users/distributors`, authHeaders)
+      .get(`http://localhost:3000/users/distributors`, authHeaders)
       .then((response) => setDistributors(response.data))
       .catch((error) => console.error("Error fetching distributors:", error));
 
     // Fetch certificates
     axios
-      .get("https://mazedakhale.in/api/certificates", authHeaders)
+      .get("http://localhost:3000/certificates", authHeaders)
       .then((response) => setCertificates(response.data))
       .catch((error) => console.error("Error fetching certificates:", error));
 
     // Fetch users
     axios
-      .get("https://mazedakhale.in/api/users/register" , authHeaders)
+      .get("http://localhost:3000/users/register" , authHeaders)
       .then((response) => setUsers(response.data))
       .catch((error) => console.error("Error fetching users:", error));
   }, []);
@@ -71,7 +71,7 @@ const token = localStorage.getItem("token");
   const handleUpdateStatus = async (documentId, newStatus) => {
     try {
       await axios.put(
-        `https://mazedakhale.in/api/documents/update-status/${documentId}`,
+        `http://localhost:3000/documents/update-status/${documentId}`,
         {
           status: newStatus,
         }
@@ -142,7 +142,7 @@ const token = localStorage.getItem("token");
     }
     try {
       const response = await axios.get(
-        `https://mazedakhale.in/api/certificates/${certificateId}`
+        `http://localhost:3000/certificates/${certificateId}`
       );
       if (response.data && response.data.file_url) {
         window.open(response.data.file_url, "_blank");
@@ -166,7 +166,7 @@ const token = localStorage.getItem("token");
 
       // Make the API call to download the file
       const response = await axios.get(
-        `https://mazedakhale.in/api/download-certificate/${documentId}`,
+        `http://localhost:3000/download-certificate/${documentId}`,
         {
           responseType: "blob", // Important to handle file downloads
         }
@@ -217,7 +217,7 @@ const token = localStorage.getItem("token");
           formData.append("documentType", documentType);
 
           const response = await axios.post(
-            `https://mazedakhale.in/api/documents/reupload/${documentId}`,
+            `http://localhost:3000/documents/reupload/${documentId}`,
             formData,
             {
               headers: {

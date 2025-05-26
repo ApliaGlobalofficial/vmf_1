@@ -29,7 +29,7 @@ const ErrorRequests = () => {
   const fetchErrorRequests = async () => {
     try {
       const { data } = await axios.get(
-        `https://mazedakhale.in/api/request-errors/distributor/${distributorId}`
+        `http://localhost:3000/request-errors/distributor/${distributorId}`
       );
       setErrorRequests(
         data.filter(
@@ -46,7 +46,7 @@ const ErrorRequests = () => {
   const fetchCertificates = async () => {
     try {
       const { data } = await axios.get(
-        "https://mazedakhale.in/api/certificates"
+        "http://localhost:3000/certificates"
       );
       setCertificates(data);
     } catch (err) {
@@ -58,7 +58,7 @@ const ErrorRequests = () => {
   const fetchAssignedDocuments = async () => {
     try {
       const { data } = await axios.get(
-        `https://mazedakhale.in/api/documents/list/${distributorId}`
+        `http://localhost:3000/documents/list/${distributorId}`
       );
       setAssignedDocs(data.documents);
     } catch (err) {
@@ -88,7 +88,7 @@ const ErrorRequests = () => {
     if (!reason) return;
     try {
       await axios.patch(
-        `https://mazedakhale.in/api/request-errors/update-status/${requestId}`,
+        `http://localhost:3000/request-errors/update-status/${requestId}`,
         { request_status: "Distributor Rejected", rejectionReason: reason }
       );
       await fetchErrorRequests();
@@ -101,7 +101,7 @@ const ErrorRequests = () => {
   const handleDownloadReceipt = async (applicationId) => {
     try {
       const { data } = await axios.get(
-        `https://mazedakhale.in/api/documents/receipt/${applicationId}`
+        `http://localhost:3000/documents/receipt/${applicationId}`
       );
       const url = data.receipt_url;
       if (!url) throw new Error("No receipt available");
@@ -125,7 +125,7 @@ const ErrorRequests = () => {
   const handleDownloadCertificate = async (applicationId) => {
     try {
       const { data } = await axios.get(
-        `https://mazedakhale.in/api/certificates/certificate/${applicationId}`
+        `http://localhost:3000/certificates/certificate/${applicationId}`
       );
       const url = data.certificate_url;
       if (!url) throw new Error("No certificate available");
@@ -160,14 +160,14 @@ const ErrorRequests = () => {
 
     const url =
       type === "certificate"
-        ? `https://mazedakhale.in/api/certificates/update/${req.document_id}`
-        : `https://mazedakhale.in/api/documents/update-receipt/${req.document_id}`;
+        ? `http://localhost:3000/certificates/update/${req.document_id}`
+        : `http://localhost:3000/documents/update-receipt/${req.document_id}`;
     const method = type === "certificate" ? "patch" : "put";
 
     try {
       await axios[method](url, formData);
       await axios.patch(
-        `https://mazedakhale.in/api/request-errors/update-status/${req.request_id}`,
+        `http://localhost:3000/request-errors/update-status/${req.request_id}`,
         {
           request_status:
             type === "certificate" ? "Uploaded" : "Receipt Uploaded",

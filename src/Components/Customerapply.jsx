@@ -53,7 +53,7 @@ const token = localStorage.getItem("token");
       "Uploaded",
     ];
     axios
-      .get("https://mazedakhale.in/api/documents/list" , authHeaders)
+      .get("http://localhost:3000/documents/list" , authHeaders)
       .then((response) => {
         const allDocs = response.data.documents;
         const filtered = allDocs
@@ -67,7 +67,7 @@ const token = localStorage.getItem("token");
       .catch((err) => console.error("Error fetching documents:", err));
 
     axios
-      .get("https://mazedakhale.in/api/certificates" , authHeaders)
+      .get("http://localhost:3000/certificates" , authHeaders)
       .then((res) => setCertificates(res.data))
       .catch((err) => console.error("Error fetching certificates:", err));
   }, [userId]);
@@ -130,7 +130,7 @@ const token = localStorage.getItem("token");
 
     try {
       const { data } = await axios.get(
-        `https://mazedakhale.in/api/certificates/${cert.certificate_id}` , authHeaders
+        `http://localhost:3000/certificates/${cert.certificate_id}` , authHeaders
       );
       if (data.file_url) {
         await downloadFileAsPdf(data.file_url, documentName);
@@ -151,7 +151,7 @@ const token = localStorage.getItem("token");
     }
     try {
       const { data } = await axios.get(
-        `https://mazedakhale.in/api/certificates/${cert.certificate_id}`, authHeaders
+        `http://localhost:3000/certificates/${cert.certificate_id}`, authHeaders
       );
       if (data.file_url) window.open(data.file_url, "_blank");
       else throw new Error("No file URL");

@@ -17,7 +17,7 @@ const ContactInfoTable = () => {
     email: "",
     address: "",
   });
-  const apiUrl = "https://mazedakhale.in/api/contact-info"; // Replace with your actual backend API
+  const apiUrl = "http://localhost:3000/contact-info"; // Replace with your actual backend API
 
   useEffect(() => {
     fetchContactInfo();

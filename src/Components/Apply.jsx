@@ -10,7 +10,7 @@ import {
   FaTimes,
 } from "react-icons/fa";
 
-const SMS_URL = "https://mazedakhale.in/api/sms/send";
+const SMS_URL = "http://localhost:3000/sms/send";
 const SMS_SENDER = "918308178738"; // your LiveOne-registered "from" number
 
 const Apply = () => {

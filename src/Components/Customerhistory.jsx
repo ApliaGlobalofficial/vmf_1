@@ -40,7 +40,7 @@ const token = localStorage.getItem("token");
   useEffect(() => {
     if (userId) {
       axios
-        .get(` https://mazedakhale.in/api/documents/list`, authHeaders)
+        .get(` http://localhost:3000/documents/list`, authHeaders)
         .then((response) => {
           const allDocuments = response.data.documents;
           // Filter documents where status is "Completed"
@@ -54,7 +54,7 @@ const token = localStorage.getItem("token");
         .catch((error) => console.error("Error fetching documents:", error));
 
       axios
-        .get(" https://mazedakhale.in/api/certificates", authHeaders)
+        .get(" http://localhost:3000/certificates", authHeaders)
         .then((response) => setCertificates(response.data))
         .catch((error) => console.error("Error fetching certificates:", error));
     }
@@ -141,7 +141,7 @@ const token = localStorage.getItem("token");
 
     try {
       const response = await axios.get(
-        `https://mazedakhale.in/api/certificates/${certificateId}` , authHeaders
+        `http://localhost:3000/certificates/${certificateId}` , authHeaders
       );
 
       if (response.data && response.data.file_url) {
@@ -207,7 +207,7 @@ const token = localStorage.getItem("token");
   const handleDownloadCertificate = async (documentId, name) => {
     try {
       const response = await axios.get(
-        ` https://mazedakhale.in/api/download-certificate/${documentId}`, authHeaders,
+        ` http://localhost:3000/download-certificate/${documentId}`, authHeaders,
         {
           responseType: "blob", // Important to handle file downloads
         }

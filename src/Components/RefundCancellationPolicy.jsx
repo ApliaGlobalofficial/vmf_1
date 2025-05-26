@@ -10,7 +10,7 @@ const RefundCancellationPolicy = () => {
     const fetchRefundPolicy = async () => {
       try {
         const response = await axios.get(
-          "https://mazedakhale.in/api/privacy-policy/type/" +
+          "http://localhost:3000/privacy-policy/type/" +
             encodeURIComponent("Return Policy")
         );
         const data = response.data;

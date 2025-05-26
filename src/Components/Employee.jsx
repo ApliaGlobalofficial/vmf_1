@@ -33,7 +33,7 @@ const Employee = () => {
   const fetchDocuments = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get("https://mazedakhale.in/api/employee");
+      const response = await axios.get("http://localhost:3000/employee");
       setDocuments(response.data);
     } catch (error) {
       console.error("Error fetching documents:", error);
@@ -49,7 +49,7 @@ const Employee = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("https://mazedakhale.in/api/categories");
+      const response = await axios.get("http://localhost:3000/categories");
       setCategories(response.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -61,7 +61,7 @@ const Employee = () => {
     try {
       // Using the same endpoint as in EmployeeList component
       const response = await axios.get(
-        "https://mazedakhale.in/api/users/employee"
+        "http://localhost:3000/users/employee"
       );
       setEmployees(response.data);
     } catch (error) {
@@ -93,7 +93,7 @@ const Employee = () => {
     if (selectedCategoryId) {
       try {
         const response = await axios.get(
-          `https://mazedakhale.in/api/subcategories/category/${selectedCategoryId}`
+          `http://localhost:3000/subcategories/category/${selectedCategoryId}`
         );
         setSubcategories(response.data);
       } catch (error) {
@@ -160,7 +160,7 @@ const Employee = () => {
           },
         });
 
-        await axios.delete(`https://mazedakhale.in/api/employee/${id}`);
+        await axios.delete(`http://localhost:3000/employee/${id}`);
 
         setDocuments((prevDocuments) =>
           prevDocuments.filter((document) => document.id !== id)
@@ -190,7 +190,7 @@ const Employee = () => {
 
     try {
       const response = await axios.get(
-        `https://mazedakhale.in/api/subcategories/category/${groupedDoc.category_id}`
+        `http://localhost:3000/subcategories/category/${groupedDoc.category_id}`
       );
       setSubcategories(response.data);
     } catch (error) {
@@ -231,12 +231,12 @@ const Employee = () => {
       if (editId) {
         // For edit, use the PUT endpoint with the new API format
         await axios.put(
-          `https://mazedakhale.in/api/employee/${editId}`,
+          `http://localhost:3000/employee/${editId}`,
           dataToSend
         );
       } else {
         // For create, use the POST endpoint with the new API format
-        await axios.post("https://mazedakhale.in/api/employee", dataToSend);
+        await axios.post("http://localhost:3000/employee", dataToSend);
       }
 
       Swal.fire({

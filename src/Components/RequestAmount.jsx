@@ -31,7 +31,7 @@ const RequestAmount = () => {
 
       console.info("Token from local storage: ", token);
       
-      const response = await fetch('https://mazedakhale.in/api/wallet_request', {
+      const response = await fetch('http://localhost:3000/wallet_request', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}` },
         body: JSON.stringify(formData),

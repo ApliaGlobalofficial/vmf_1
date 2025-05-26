@@ -19,7 +19,7 @@ const Youtube = () => {
   });
 
   const navigate = useNavigate();
-  const apiUrl = "https://mazedakhale.in/api/images";
+  const apiUrl = "http://localhost:3000/images";
 
   // Fetch all images
   const fetchImages = async () => {

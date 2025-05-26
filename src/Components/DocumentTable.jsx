@@ -22,7 +22,7 @@ const DocumentTable = () => {
   const fetchDocuments = async () => {
     try {
       const { data } = await axios.get(
-        "https://mazedakhale.in/api/document-types"
+        "http://localhost:3000/document-types"
       );
       setDocuments(data);
     } catch (error) {
@@ -38,12 +38,12 @@ const DocumentTable = () => {
     try {
       if (editingDoc) {
         await axios.put(
-          `https://mazedakhale.in/api/document-types/${editingDoc.doc_type_id}`,
+          `http://localhost:3000/document-types/${editingDoc.doc_type_id}`,
           formData
         );
       } else {
         await axios.post(
-          "https://mazedakhale.in/api/document-types/",
+          "http://localhost:3000/document-types/",
           formData
         );
       }
@@ -70,7 +70,7 @@ const DocumentTable = () => {
     });
     if (res.isConfirmed) {
       try {
-        await axios.delete(`https://mazedakhale.in/api/document-types/${id}`);
+        await axios.delete(`http://localhost:3000/document-types/${id}`);
         fetchDocuments();
         Swal.fire("Deleted!", "Document has been deleted.", "success");
       } catch {

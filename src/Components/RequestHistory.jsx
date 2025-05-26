@@ -18,7 +18,7 @@ const RequestHistory = () => {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch("https://mazedakhale.in/api/wallet_request", {
+        const res = await fetch("http://localhost:3000/wallet_request", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
