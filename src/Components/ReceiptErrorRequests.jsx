@@ -36,7 +36,7 @@ const ReceiptErrorRequests = () => {
   const fetchErrorRequests = async () => {
     try {
       const { data } = await axios.get(
-        "http://3.6.61.72:3000/request-errors"
+        `${import.meta.env.VITE_API_URL}request-errors`
       );
       setErrorRequests(data);
     } catch (err) {
@@ -47,7 +47,7 @@ const ReceiptErrorRequests = () => {
   const fetchUsers = async () => {
     try {
       const { data } = await axios.get(
-        "http://3.6.61.72:3000/users/register"
+        `${import.meta.env.VITE_API_URL}users/register`
       );
       setUsers(data);
     } catch (err) {
@@ -58,7 +58,7 @@ const ReceiptErrorRequests = () => {
   const fetchDistributors = async () => {
     try {
       const { data } = await axios.get(
-        "http://3.6.61.72:3000/users/distributors"
+        `${import.meta.env.VITE_API_URL}users/distributors`
       );
       setDistributors(data);
     } catch (err) {
@@ -85,7 +85,7 @@ const ReceiptErrorRequests = () => {
   const handleDownloadReceipt = async (applicationId) => {
     try {
       const { data } = await axios.get(
-        `http://3.6.61.72:3000//documents/receipt/${applicationId}`
+        `${import.meta.env.VITE_API_URL}documents/receipt/${applicationId}`
       );
       const url = data.receipt_url;
       const appId = data.application_id;
@@ -114,7 +114,7 @@ const ReceiptErrorRequests = () => {
   const handleDownloadCertificate = async (applicationId) => {
     try {
       const { data } = await axios.get(
-        `http://3.6.61.72:3000/certificates/certificate/${applicationId}`
+        `${import.meta.env.VITE_API_URL}certificates/certificate/${applicationId}`
       );
       const url = data.certificate_url;
       const appId = data.application_id;
@@ -167,7 +167,7 @@ const ReceiptErrorRequests = () => {
 
     try {
       await axios.patch(
-        `http://3.6.61.72:3000/request-errors/update-status/${requestId}`,
+        `${import.meta.env.VITE_API_URL}request-errors/update-status/${requestId}`,
         { request_status: newStatus, rejectionReason }
       );
     } catch (err) {

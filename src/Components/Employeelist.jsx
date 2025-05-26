@@ -21,7 +21,7 @@ const EmployeeList = () => {
   });
 
   const navigate = useNavigate();
-  const apiUrl = "http://3.6.61.72:3000/users";
+  const apiUrl = `${import.meta.env.VITE_API_URL}users`;
 
   useEffect(() => {
     fetchEmployees();

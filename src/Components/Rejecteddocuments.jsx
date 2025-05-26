@@ -29,7 +29,7 @@ const token = localStorage.getItem("token");
   useEffect(() => {
     // Fetch assigned documents from the new API
     axios
-      .get(`http://3.6.61.72:3000/documents/assigned-list`, authHeaders)
+      .get(`${import.meta.env.VITE_API_URL}documents/assigned-list`, authHeaders)
       .then((response) => {
         const sortedDocuments = response.data.documents.sort(
           (a, b) => new Date(b.uploaded_at) - new Date(a.uploaded_at)
@@ -42,19 +42,19 @@ const token = localStorage.getItem("token");
 
     // Fetch distributors
     axios
-      .get(`http://3.6.61.72:3000/users/distributors`, authHeaders)
+      .get(`${import.meta.env.VITE_API_URL}users/distributors`, authHeaders)
       .then((response) => setDistributors(response.data))
       .catch((error) => console.error("Error fetching distributors:", error));
 
     // Fetch certificates
     axios
-      .get("http://3.6.61.72:3000/certificates", authHeaders)
+      .get(`${import.meta.env.VITE_API_URL}certificates`, authHeaders)
       .then((response) => setCertificates(response.data))
       .catch((error) => console.error("Error fetching certificates:", error));
 
     // Fetch users
     axios
-      .get("http://3.6.61.72:3000/users/register" , authHeaders)
+      .get(`${import.meta.env.VITE_API_URL}users/register` , authHeaders)
       .then((response) => setUsers(response.data))
       .catch((error) => console.error("Error fetching users:", error));
   }, []);
@@ -71,7 +71,7 @@ const token = localStorage.getItem("token");
   const handleUpdateStatus = async (documentId, newStatus) => {
     try {
       await axios.put(
-        `http://3.6.61.72:3000/documents/update-status/${documentId}`,
+        `${import.meta.env.VITE_API_URL}documents/update-status/${documentId}`,
         {
           status: newStatus,
         }
@@ -142,7 +142,7 @@ const token = localStorage.getItem("token");
     }
     try {
       const response = await axios.get(
-        `http://3.6.61.72:3000/certificates/${certificateId}`
+        `${import.meta.env.VITE_API_URL}certificates/${certificateId}`
       );
       if (response.data && response.data.file_url) {
         window.open(response.data.file_url, "_blank");
@@ -166,7 +166,7 @@ const token = localStorage.getItem("token");
 
       // Make the API call to download the file
       const response = await axios.get(
-        `http://3.6.61.72:3000/download-certificate/${documentId}`,
+        `${import.meta.env.VITE_API_URL}download-certificate/${documentId}`,
         {
           responseType: "blob", // Important to handle file downloads
         }
@@ -217,7 +217,7 @@ const token = localStorage.getItem("token");
           formData.append("documentType", documentType);
 
           const response = await axios.post(
-            `http://3.6.61.72:3000/documents/reupload/${documentId}`,
+            `${import.meta.env.VITE_API_URL}documents/reupload/${documentId}`,
             formData,
             {
               headers: {

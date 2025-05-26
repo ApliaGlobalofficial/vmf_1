@@ -20,9 +20,9 @@ import { BsStopCircle } from "react-icons/bs";
 
 import Logo from "../assets/logo.png";
 
-const API_CATEGORIES = "http://3.6.61.72:3000/categories";
-const API_SUBCATEGORIES = "http://3.6.61.72:3000/subcategories";
-const API_PRICES = "http://3.6.61.72:3000/prices";
+const API_CATEGORIES = `${import.meta.env.VITE_API_URL}categories`;
+const API_SUBCATEGORIES = `${import.meta.env.VITE_API_URL}subcategories`;
+const API_PRICES = `${import.meta.env.VITE_API_URL}prices`;
 
 // Footer links
 const navLabels = [

@@ -36,13 +36,13 @@ const DlistPage = () => {
   useEffect(() => {
     if (categoryId) {
       axios
-        .get(`http://3.6.61.72:3000/categories/${categoryId}`)
+        .get(`${import.meta.env.VITE_API_URL}categories/${categoryId}`)
         .then((res) => setCategoryName(res.data.category_name))
         .catch((err) => console.error("Error loading category:", err));
     }
     if (subcategoryId) {
       axios
-        .get(`http://3.6.61.72:3000/subcategories/${subcategoryId}`)
+        .get(`${import.meta.env.VITE_API_URL}subcategories/${subcategoryId}`)
         .then((res) => setSubcategoryName(res.data.subcategory_name))
         .catch((err) => console.error("Error loading subcategory:", err));
     }
@@ -52,7 +52,7 @@ const DlistPage = () => {
   useEffect(() => {
     if (!categoryId || !subcategoryId || !distributorId) return;
 
-    const url = `http://3.6.61.72:3000/documents/${categoryId}/${subcategoryId}?distributorId=${distributorId}`;
+    const url = `${import.meta.env.VITE_API_URL}documents/${categoryId}/${subcategoryId}?distributorId=${distributorId}`;
     axios
       .get(url)
       .then((resp) => {
@@ -64,7 +64,7 @@ const DlistPage = () => {
       .catch((err) => console.error("Error fetching documents:", err));
 
     axios
-      .get("http://3.6.61.72:3000/certificates")
+      .get(`${import.meta.env.VITE_API_URL}certificates`)
       .then((resp) => setCertificates(resp.data))
       .catch((err) => console.error("Error fetching certificates:", err));
   }, [categoryId, subcategoryId, distributorId]);
@@ -102,7 +102,7 @@ const DlistPage = () => {
     if (!cert) return Swal.fire("Error", "Certificate not found.", "error");
     try {
       const resp = await axios.get(
-        `http://3.6.61.72:3000/certificates/${cert.certificate_id}`
+        `${import.meta.env.VITE_API_URL}certificates/${cert.certificate_id}`
       );
       const link = document.createElement("a");
       link.href = resp.data.file_url;

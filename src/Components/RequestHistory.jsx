@@ -18,7 +18,7 @@ const RequestHistory = () => {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch("http://3.6.61.72:3000/wallet_request", {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}wallet_request`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

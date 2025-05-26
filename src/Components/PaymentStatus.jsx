@@ -25,7 +25,7 @@ export default function PaymentStatus() {
     }
 
     const statusUrl = import.meta.env.DEV
-      ? `http://3.6.61.72:3000/payment/status?merchantOrderId=${merchantOrderId}`
+      ? `${import.meta.env.VITE_API_URL}payment/status?merchantOrderId=${merchantOrderId}`
       : `/payment/status?merchantOrderId=${merchantOrderId}`;
 
     const interval = setInterval(() => {
@@ -54,7 +54,7 @@ export default function PaymentStatus() {
             const txId = normalized.paymentDetails[0]?.transactionId;
             if (txId) {
               const cbUrl = import.meta.env.DEV
-                ? `http://3.6.61.72:3000/payment/callback`
+                ? `${import.meta.env.VITE_API_URL}payment/callback`
                 : `/payment/callback`;
 
               axios

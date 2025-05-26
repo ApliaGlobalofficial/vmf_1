@@ -17,8 +17,8 @@ const Addsubcategory = () => {
   const [isAdding, setIsAdding] = useState(false);
   const navigate = useNavigate();
 
-  // const API_BASE_URL = "http://3.6.61.72:3000";
-  const API_BASE_URL = "http://3.6.61.72:3000";
+  // const API_BASE_URL = "http://localhost:3000";
+  const API_BASE_URL = "http://localhost:3000";
 
   useEffect(() => {
     fetchSubcategories();

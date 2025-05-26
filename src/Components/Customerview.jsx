@@ -26,7 +26,7 @@ const ApplicationView = () => {
   const fetchDocumentData = useCallback(async () => {
     try {
       const response = await axios.get(
-        `http://3.6.61.72:3000/singledocument/documentby/${documentId}`
+        `${import.meta.env.VITE_API_URL}singledocument/documentby/${documentId}`
       );
       const data = response.data.document;
       setDocumentData(data);
@@ -36,7 +36,7 @@ const ApplicationView = () => {
 
       if (category && subcategory) {
         const fieldNamesResponse = await axios.get(
-          `http://3.6.61.72:3000/field-names/${category}/${subcategory}`
+          `${import.meta.env.VITE_API_URL}field-names/${category}/${subcategory}`
         );
         setDocumentNames(fieldNamesResponse.data);
       }

@@ -19,7 +19,7 @@ const Youtube = () => {
   });
 
   const navigate = useNavigate();
-  const apiUrl = "http://3.6.61.72:3000/images";
+  const apiUrl = `${import.meta.env.VITE_API_URL}images`;
 
   // Fetch all images
   const fetchImages = async () => {

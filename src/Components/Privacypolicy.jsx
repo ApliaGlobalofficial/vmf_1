@@ -11,7 +11,7 @@ const PrivacyPolicy = () => {
       try {
         // Fetch only the "Privacy Policy" type
         const response = await axios.get(
-          "http://3.6.61.72:3000/privacy-policy/type/Privacy%20Policy"
+          `${import.meta.env.VITE_API_URL}privacy-policy/type/Privacy%20Policy`
         );
         const data = response.data;
 

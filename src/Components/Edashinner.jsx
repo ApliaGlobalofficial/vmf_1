@@ -144,13 +144,13 @@ const Edashinner = () => {
       try {
         // Create an array of promises for all API calls
         const promises = [
-          fetch("http://3.6.61.72:3000/statistics/counts").then((res) =>
+          fetch(`${import.meta.env.VITE_API_URL}statistics/counts`).then((res) =>
             res.json()
           ),
-          axios.get("http://3.6.61.72:3000/categories"),
-          axios.get("http://3.6.61.72:3000/subcategories"),
-          axios.get("http://3.6.61.72:3000/statistics/cscounts"),
-          axios.get("http://3.6.61.72:3000/required-documents"),
+          axios.get(`${import.meta.env.VITE_API_URL}categories`),
+          axios.get(`${import.meta.env.VITE_API_URL}subcategories`),
+          axios.get(`${import.meta.env.VITE_API_URL}statistics/cscounts`),
+          axios.get(`${import.meta.env.VITE_API_URL}required-documents`),
         ];
 
         // Wait for all promises to resolve

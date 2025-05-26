@@ -10,12 +10,12 @@ import {
   FaTimes,
 } from "react-icons/fa";
 
-const SMS_URL = "http://3.6.61.72:3000/sms/send";
+const SMS_URL = `${import.meta.env.VITE_API_URL}sms/send`;
 const SMS_SENDER = "918308178738"; // your LiveOne-registered "from" number
 
 const Apply = () => {
   const [documentNames, setDocumentNames] = useState([]);
-  const API = import.meta.env.VITE_API_URL || 'http://3.6.61.72:3000';
+  const API = import.meta.env.VITE_API_URL || 'http://localhost:3000';
   const [selectedFiles, setSelectedFiles] = useState({});
   const [servicePrice, setServicePrice] = useState(0);
   const [statusMsg, setStatusMsg] = useState('');

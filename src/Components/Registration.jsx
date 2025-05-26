@@ -10,7 +10,7 @@ import {
 } from "../utils/formValidators";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import "../index.css";
-const SMS_URL = "http://3.6.61.72:3000/sms/send";
+const SMS_URL = `${import.meta.env.VITE_API_URL}sms/send`;
 const SMS_SENDER = "918308178738"; // your LiveOne-registered “from” number
 
 const Register = () => {
@@ -419,7 +419,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://3.6.61.72:3000/categories")
+    fetch(`${import.meta.env.VITE_API_URL}categories`)
       .then((res) => res.json())
       .then(setCategories)
       .catch(console.error);
@@ -430,7 +430,7 @@ const Register = () => {
       const data = {};
       for (const category of categories) {
         const res = await fetch(
-          `http://3.6.61.72:3000/subcategories/category/${category.category_id}`
+          `${import.meta.env.VITE_API_URL}subcategories/category/${category.category_id}`
         );
         data[category.category_id] = res.ok ? await res.json() : [];
       }
@@ -575,7 +575,7 @@ const Register = () => {
         payload.append("profilePhoto", formData.profilePhoto);
       }
 
-      const res = await fetch("http://3.6.61.72:3000/users/register", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}users/register`, {
         method: "POST",
         body: payload,
       });

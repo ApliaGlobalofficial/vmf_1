@@ -10,8 +10,8 @@ const Contact = () => {
   const [fieldKeys, setFieldKeys] = useState([]);
   const [isAdding, setIsAdding] = useState(false); // fields from Field API
   const navigate = useNavigate();
-  const contactApiUrl = "http://3.6.61.72:3000/contact";
-  const fieldApiUrl = "http://3.6.61.72:3000/field";
+  const contactApiUrl = `${import.meta.env.VITE_API_URL}contact`;
+  const fieldApiUrl = `${import.meta.env.VITE_API_URL}field`;
 
   useEffect(() => {
     fetchData();

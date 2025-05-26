@@ -102,12 +102,12 @@ const InvoicePage = () => {
 
     try {
       await axios.post(
-        `http://3.6.61.72:3000/documents/upload-receipt/${documentId}`,
+        `${import.meta.env.VITE_API_URL}documents/upload-receipt/${documentId}`,
         form,
         { headers: { "Content-Type": "multipart/form-data" }, timeout: 30000 , ...authHeaders}
       );
       await axios.put(
-        `http://3.6.61.72:3000/documents/update-status/${documentId}`,
+        `${import.meta.env.VITE_API_URL}documents/update-status/${documentId}`,
         { status: "Sent" },
         { timeout: 30000 ,  ...authHeaders }
       );
@@ -167,14 +167,14 @@ const InvoicePage = () => {
 
     try {
       // 1️⃣ Upload the cert file
-      await axios.post("http://3.6.61.72:3000/certificates/upload", form, {
+      await axios.post(`${import.meta.env.VITE_API_URL}certificates/upload`, form, {
         headers: { "Content-Type": "multipart/form-data" },
         timeout: 30000, authHeaders
       });
 
       // 2️⃣ THEN update the document status
       await axios.put(
-        `http://3.6.61.72:3000/documents/update-status/${documentId}`,
+        `${import.meta.env.VITE_API_URL}documents/update-status/${documentId}`,
         { status: "Uploaded" },
         { timeout: 30000 ,  ...authHeaders }
       );
@@ -211,7 +211,7 @@ const InvoicePage = () => {
 
     try {
       const response = await axios.get(
-        `http://3.6.61.72:3000/download/all/${documentId}`,
+        `${import.meta.env.VITE_API_URL}download/all/${documentId}`,
         {
           responseType: "blob",
           timeout: 120000, authHeaders,
@@ -293,7 +293,7 @@ const InvoicePage = () => {
           .map((doc) => documentNames[doc.document_type] || doc.document_type),
       };
       await axios.put(
-        `http://3.6.61.72:3000/documents/update-status/${documentId}`,
+        `${import.meta.env.VITE_API_URL}documents/update-status/${documentId}`,
         payload,
         { timeout: 30000, headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
@@ -317,7 +317,7 @@ const InvoicePage = () => {
   // --- Fetchers & effects ---
   const fetchCertificates = useCallback(async () => {
     try {
-      const res = await axios.get("http://3.6.61.72:3000/certificates", {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}certificates`, {
         timeout: 30000,
       });
       setCertificates(res.data);
@@ -329,7 +329,7 @@ const InvoicePage = () => {
   const fetchDocumentData = useCallback(async () => {
     try {
       const res = await axios.get(
-        `http://3.6.61.72:3000/singledocument/documentby/${documentId}`
+        `${import.meta.env.VITE_API_URL}singledocument/documentby/${documentId}`
       );
       const doc = res.data.document;
       setDocumentData(doc);
@@ -338,7 +338,7 @@ const InvoicePage = () => {
       const sub = stateSubcategoryId || doc.subcategory_id;
       if (cat && sub) {
         const fn = await axios.get(
-          `http://3.6.61.72:3000/field-names/${cat}/${sub}`
+          `${import.meta.env.VITE_API_URL}field-names/${cat}/${sub}`
         );
         setDocumentNames(fn.data);
       }
@@ -356,7 +356,7 @@ const InvoicePage = () => {
       } catch {}
     }
     axios
-      .get("http://3.6.61.72:3000/users/distributors")
+      .get(`${import.meta.env.VITE_API_URL}users/distributors`)
       .then((r) => setDistributors(r.data))
       .catch(console.error);
 

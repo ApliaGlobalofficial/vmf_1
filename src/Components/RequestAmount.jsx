@@ -31,7 +31,7 @@ const RequestAmount = () => {
 
       console.info("Token from local storage: ", token);
       
-      const response = await fetch('http://3.6.61.72:3000/wallet_request', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}wallet_request', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${token}` },
         body: JSON.stringify(formData),

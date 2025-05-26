@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function WalletHistoryC() {
-  const API = import.meta.env.VITE_API_URL || "http://3.6.61.72:3000";
+  const API = import.meta.env.VITE_API_URL ;
 
   const [walletHistory, setWalletHistory] = useState([]);
   const [filter, setFilter] = useState("All"); // CREDIT, DEBIT, All
@@ -19,7 +19,7 @@ export default function WalletHistoryC() {
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
         const { data: txs = [] } = await axios.get(
-          `${API}/wallet/transactions`,
+          `${API}wallet/transactions`,
           { headers }
         );
         setWalletHistory(txs);

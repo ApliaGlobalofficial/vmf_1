@@ -30,7 +30,7 @@ const RequiredDocuments = () => {
   const fetchDocuments = async () => {
     try {
       const response = await axios.get(
-        "http://3.6.61.72:3000/required-documents"
+        `${import.meta.env.VITE_API_URL}required-documents`
       );
       // Add default values for category and subcategory if they are null
       const documentsWithDefaults = response.data.map((doc) => ({
@@ -49,7 +49,7 @@ const RequiredDocuments = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("http://3.6.61.72:3000/categories");
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}categories`);
       setCategories(response.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -60,7 +60,7 @@ const RequiredDocuments = () => {
     if (!categoryId) return;
     try {
       const response = await axios.get(
-        `http://3.6.61.72:3000/subcategories/category/${categoryId}`
+        `${import.meta.env.VITE_API_URL}subcategories/category/${categoryId}`
       );
       setSubcategories(response.data);
     } catch (error) {
@@ -104,7 +104,7 @@ const RequiredDocuments = () => {
     if (confirmDelete.isConfirmed) {
       try {
         await axios.delete(
-          `http://3.6.61.72:3000/required-documents/${id}`
+          `${import.meta.env.VITE_API_URL}required-documents/${id}`
         );
         setDocuments((prevDocuments) =>
           prevDocuments.filter((document) => document.id !== id)
@@ -157,8 +157,8 @@ const RequiredDocuments = () => {
       }
 
       const url = editId
-        ? `http://3.6.61.72:3000/required-documents/${editId}`
-        : "http://3.6.61.72:3000/required-documents";
+        ? `${import.meta.env.VITE_API_URL}required-documents/${editId}`
+        : `${import.meta.env.VITE_API_URL}required-documents`;
 
       const method = editId ? "patch" : "post";
 

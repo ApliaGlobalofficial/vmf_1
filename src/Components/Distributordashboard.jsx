@@ -287,7 +287,7 @@ const Distributordashboard = ({ children }) => {
 
       try {
         const authHeaders = { Authorization: `Bearer ${token}` };
-        const res = await axios.get("http://3.6.61.72:3000/wallet", {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}wallet`, {
           headers: authHeaders,
         });
         const num = parseFloat(res.data.balance);

@@ -38,7 +38,7 @@ const ErrorRequests = () => {
         `Fetching error requests for distributor ID: ${distributorId}`
       );
       const response = await axios.get(
-        `http://3.6.61.72:3000/request-errors/distributor/${distributorId}`
+        `${import.meta.env.VITE_API_URL}request-errors/distributor/${distributorId}`
       );
       console.log("Error Requests API Response:", response.data);
 
@@ -60,7 +60,7 @@ const ErrorRequests = () => {
     try {
       console.log("Fetching certificates...");
       const response = await axios.get(
-        "http://3.6.61.72:3000/certificates"
+        `${import.meta.env.VITE_API_URL}certificates`
       );
       console.log("Certificates API Response:", response.data);
       setCertificates(response.data);
@@ -91,7 +91,7 @@ const ErrorRequests = () => {
     try {
       console.log(`Fetching certificate for Certificate ID: ${certificateId}`);
       const response = await axios.get(
-        `http://3.6.61.72:3000/certificates/${certificateId}`
+        `${import.meta.env.VITE_API_URL}certificates/${certificateId}`
       );
       console.log("View Certificate API Response:", response.data);
 
@@ -118,7 +118,7 @@ const ErrorRequests = () => {
   const handleDownloadCertificate = async (documentId, requestName) => {
     try {
       const response = await axios.get(
-        `http://3.6.61.72:3000/download-certificate/${documentId}`,
+        `${import.meta.env.VITE_API_URL}download-certificate/${documentId}`,
         {
           responseType: "blob", // Important to handle file downloads
         }

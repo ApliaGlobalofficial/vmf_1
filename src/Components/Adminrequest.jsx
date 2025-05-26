@@ -20,7 +20,7 @@ const ErrorRequests = () => {
   const fetchErrorRequests = async () => {
     try {
       const response = await axios.get(
-        "http://3.6.61.72:3000/request-errors"
+        `${import.meta.env.VITE_API_URL}request-errors`
       );
       setErrorRequests(response.data);
     } catch (error) {
@@ -31,7 +31,7 @@ const ErrorRequests = () => {
   const fetchCertificates = async () => {
     try {
       const response = await axios.get(
-        "http://3.6.61.72:3000/certificates"
+        `${import.meta.env.VITE_API_URL}certificates`
       );
       setCertificates(response.data);
     } catch (error) {
@@ -54,7 +54,7 @@ const ErrorRequests = () => {
     }
     try {
       const response = await axios.get(
-        `http://3.6.61.72:3000/certificates/${certificateId}`
+        `${import.meta.env.VITE_API_URL}certificates/${certificateId}`
       );
       if (response.data && response.data.file_url) {
         window.open(response.data.file_url, "_blank");
@@ -110,7 +110,7 @@ const ErrorRequests = () => {
 
     try {
       await axios.patch(
-        `http://3.6.61.72:3000/request-errors/update-status/${requestId}`,
+        `${import.meta.env.VITE_API_URL}request-errors/update-status/${requestId}`,
         {
           request_status: newStatus,
           rejectionReason,
