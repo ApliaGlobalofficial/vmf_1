@@ -9,12 +9,9 @@ const Categories = () => {
   const [subcategories, setSubcategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
-  // const API_BASE_URL = `${import.meta.env.VITE_API_URL}categories`;
-  // const SUBCATEGORIES_API_URL = `${import.meta.env.VITE_API_URL}subcategories`;
-const baseUrl = import.meta.env.VITE_API_URL.replace(/\/+$/, ''); // removes trailing slashes if present
+  const API_BASE_URL = `${import.meta.env.VITE_API_URL}categories`;
+  const SUBCATEGORIES_API_URL = `${import.meta.env.VITE_API_URL}subcategories`;
 
-const API_BASE_URL = `${baseUrl}categories`;
-const SUBCATEGORIES_API_URL = `${baseUrl}subcategories`;
   useEffect(() => {
     const fetchCategories = async () => {
       try {
