@@ -58,7 +58,9 @@ const ErrorRequests = () => {
   const fetchAssignedDocuments = async () => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/documents/list/${distributorId}`
+        `${import.meta.env.VITE_API_URL}/documents/list/${distributorId}`,{headers:{
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }}
       );
       setAssignedDocs(data.documents);
     } catch (err) {
