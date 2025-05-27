@@ -30,7 +30,7 @@ const Login = () => {
 
   // Fetch subcategories once categories arrive
   useEffect(() => {
-    const fetchSubcategories = async () => {}
+    const fetchSubcategories = async () => {
       const result = {};
       try {
         for (const cat of categories) {
