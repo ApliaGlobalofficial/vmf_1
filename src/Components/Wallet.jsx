@@ -21,11 +21,11 @@ export default function Wallet() {
 
             const {
                 data: { balance: bal = 0 },
-            } = await axios.get(`${API}/wallet`, { headers })
+            } = await axios.get(`${API}wallet`, { headers })
             setBalance(typeof bal === 'string' ? parseFloat(bal) : bal)
 
             const { data: txs = [] } = await axios.get(
-                `${API}/wallet/transactions`,
+                `${API}wallet/transactions`,
                 { headers }
             )
             setTransactions(txs)
