@@ -139,7 +139,7 @@ export default function CustomerDashboard() {
   // ─── Helper Fetchers ────────────────────────────────
   const fetchCategories = async () => {
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/categories`);
       setCategories(data);
     } catch {}
   };

@@ -11,7 +11,7 @@ export default defineConfig({
     watch: {
       usePolling: true,
     },
-    allowedHosts: ["mazedakhale.in"],
+    allowedHosts: ["mazedakhale.in","api.mazedakhale.in",""],
     proxy: {
       "/api": {
         target: "http://3.6.61.72:3000",

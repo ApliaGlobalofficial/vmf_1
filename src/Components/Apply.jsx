@@ -15,7 +15,7 @@ const SMS_SENDER = "918308178738"; // your LiveOne-registered "from" number
 
 const Apply = () => {
   const [documentNames, setDocumentNames] = useState([]);
-  const API = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+  const API = import.meta.env.VITE_API_URL ;
   const [selectedFiles, setSelectedFiles] = useState({});
   const [servicePrice, setServicePrice] = useState(0);
   const [statusMsg, setStatusMsg] = useState('');
@@ -106,7 +106,7 @@ const Apply = () => {
     try {
       // Try the specific endpoint first
       const response = await axios.get(
-        `${API}prices/${formData.category_id}/${formData.subcategory_id}`
+        `${API}/prices/${formData.category_id}`
       );
 
       if (response.data && response.data.amount) {
@@ -122,7 +122,7 @@ const Apply = () => {
 
       // Fallback: try to get all prices and filter
       try {
-        const fallbackResponse = await axios.get(`${API}prices`);
+        const fallbackResponse = await axios.get(`${API}/prices`);
         const prices = fallbackResponse.data;
 
         const priceRecord = prices.find(
@@ -158,7 +158,7 @@ const Apply = () => {
     if (formData.category_id && formData.subcategory_id) {
       axios
         .get(
-          `${API}required-documents/${formData.category_id}/${formData.subcategory_id}`
+          `${API}/required-documents/${formData.category_id}/${formData.subcategory_id}`
         )
         .then((response) => {
           if (response.data.length > 0 && response.data[0].document_names) {
@@ -184,7 +184,7 @@ const Apply = () => {
     if (formData.category_id && formData.subcategory_id) {
       axios
         .get(
-          `${API}field-names/${formData.category_id}/${formData.subcategory_id}`
+          `${API}/field-names/${formData.category_id}/${formData.subcategory_id}`
         )
         .then((response) => {
           if (response.data.length > 0 && response.data[0].document_fields) {
@@ -266,7 +266,7 @@ const Apply = () => {
 
   const checkWalletBalance = async () => {
     try {
-      const response = await axios.get(`${API}wallet`, {
+      const response = await axios.get(`${API}/wallet`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       return response.data.balance >= servicePrice;
@@ -279,7 +279,7 @@ const Apply = () => {
   const debitFromWallet = async () => {
     try {
       const response = await axios.post(
-        `${API}wallet/debit`,
+        `${API}/wallet/debit`,
         {
           amount: servicePrice,
           description: `Payment for ${formData.subcategory_name} application`,
@@ -418,7 +418,7 @@ const Apply = () => {
 
       // Submit the application
       const response = await axios.post(
-        `${API}documents/upload`,
+        `${API}/documents/upload`,
         formDataToSend,
         authHeaders,
         {
