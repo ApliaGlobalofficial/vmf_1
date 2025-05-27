@@ -9,7 +9,7 @@ const Categories = () => {
   const [subcategories, setSubcategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
-  const API_BASE_URL = `${import.meta.env.VITE_API_URL}categories`;
+  const API_BASE_URL = `${import.meta.env.VITE_API_URL}/categories`;
   const SUBCATEGORIES_API_URL = `${import.meta.env.VITE_API_URL}/subcategories`;
 
   useEffect(() => {

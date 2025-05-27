@@ -158,7 +158,7 @@ const Adashinner = () => {
           fetch(`${import.meta.env.VITE_API_URL}/statistics/counts`).then((res) =>
             res.json()
           ),
-          axios.get(`${import.meta.env.VITE_API_URL}categories`),
+          axios.get(`${import.meta.env.VITE_API_URL}/categories`),
           axios.get(`${import.meta.env.VITE_API_URL}/subcategories`),
           axios.get(`${import.meta.env.VITE_API_URL}/statistics/cscounts`),
         ];
