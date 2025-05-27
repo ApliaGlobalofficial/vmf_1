@@ -92,7 +92,7 @@ const Ddashinner = () => {
   useEffect(() => {
     // Fetch categories (no dependencies, fetch immediately)
     api
-      .get(`/categories`)
+      .get(`categories`)
       .then((response) => {
         setCategories(response.data);
         localStorage.setItem(
@@ -106,7 +106,7 @@ const Ddashinner = () => {
 
     // Fetch subcategories (no dependencies, fetch immediately)
     api
-      .get(`/subcategories`)
+      .get(`subcategories`)
       .then((response) => {
         const subsByCategory = {};
         response.data.forEach((sub) => {
@@ -132,7 +132,7 @@ const Ddashinner = () => {
 
     // Fetch notifications (no dependencies, fetch immediately)
     api
-      .get(`/notifications/active`)
+      .get(`notifications/active`)
       .then((response) => {
         const distributorNotifications = response.data.filter(
           (notif) =>
@@ -152,7 +152,7 @@ const Ddashinner = () => {
 
     // Fetch pending counts
     api
-      .get(`/statistics/pending-counts/${distributorId}`)
+      .get(`statistics/pending-counts/${distributorId}`)
       .then((response) => {
         // Convert array to object for O(1) lookups
         const catCounts = {};
@@ -178,7 +178,7 @@ const Ddashinner = () => {
 
     // Fetch counts
     api
-      .get(`/statistics/distributor-counts/${distributorId}`)
+      .get(`statistics/distributor-counts/${distributorId}`)
       .then((response) => {
         setCounts(response.data || {});
 
