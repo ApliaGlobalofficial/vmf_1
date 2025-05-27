@@ -112,7 +112,7 @@ export default function CustomerDashboard() {
     axios
       .get(`${import.meta.env.VITE_API_URL}/userdashboard/category-counts/${userId}`)
       .then((res) => {
-        const withColors = res.data.categories.map((c, i) => ({
+        const withColors = res?.data?.categories?.map((c, i) => ({
           name: c.category,
           value: c.totalApplications,
           pending: c.pendingApplications,
@@ -299,7 +299,7 @@ export default function CustomerDashboard() {
       {/* Categories & Subcategories Grid */}
       <div className="w-full max-w-7xl mx-auto mt-6">
         {categories.map((cat) => {
-          const catCount = categoryCounts.find(
+          const catCount = categoryCounts?.find(
             (c) => c.category === cat.category_name
           );
           const pendingCat = catCount?.pendingApplications || 0;
@@ -334,7 +334,7 @@ export default function CustomerDashboard() {
               {/* Subcategories */}
               <div className="grid grid-cols-3 gap-4 mt-4">
                 {children.map((sub) => {
-                  const subCount = subcategoryCounts.find(
+                  const subCount = subcategoryCounts?.find(
                     (c) =>
                       c.subcategory === sub.subcategory_name &&
                       c.category === cat.category_name
@@ -423,7 +423,7 @@ export default function CustomerDashboard() {
         {/* Category Pie */}
         <div className="w-1/2 bg-white shadow-md p-6 rounded-xl">
           <h2 className="text-xl font-bold mb-4">Category Distribution</h2>
-          {categoryData.length ? (
+          {categoryData?.length ? (
             <PieChart width={350} height={300}>
               <Pie
                 data={categoryData}
