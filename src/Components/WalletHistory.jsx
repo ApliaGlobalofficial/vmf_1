@@ -27,7 +27,7 @@ export default function WalletHistory() {
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
         const { data: txs = [] } = await axios.get(
-          `${API}wallet/transactions`, authHeaders,
+          `${API}/wallet/transactions`, authHeaders,
           { headers }
         );
         setWalletHistory(txs);

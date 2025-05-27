@@ -36,7 +36,7 @@ const DlistPage = () => {
   useEffect(() => {
     if (categoryId) {
       axios
-        .get(`${import.meta.env.VITE_API_URL}categories/${categoryId}`)
+        .get(`${import.meta.env.VITE_API_URL}/categories/${categoryId}`)
         .then((res) => setCategoryName(res.data.category_name))
         .catch((err) => console.error("Error loading category:", err));
     }

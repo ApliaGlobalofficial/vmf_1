@@ -41,7 +41,7 @@ const Price = () => {
   // 2) load categories + build master subcategory list
   const fetchCategoriesAndAllSubcats = async () => {
     try {
-      const { data: cats } = await axios.get( `${import.meta.env.VITE_API_URL}categories`      );
+      const { data: cats } = await axios.get( `${import.meta.env.VITE_API_URL}/categories`      );
       setCategories(cats);
 
       const all = [];

@@ -20,7 +20,7 @@ const AddCategory = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(`${apiUrl}/`);
+      const response = await axios.get(`${apiUrl}/categories`);
       setCategories(response.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -34,7 +34,7 @@ const AddCategory = () => {
     }
 
     try {
-      await axios.post(apiUrl, { category_name: categoryName });
+      await axios.post(`${apiUrl}/categories`, { category_name: categoryName });
       setCategoryName("");
       setIsAdding(false);
       fetchCategories();
@@ -57,7 +57,7 @@ const AddCategory = () => {
     }
 
     try {
-      await axios.patch(`${apiUrl}/${id}`, { category_name: updatedName });
+      await axios.patch(`${apiUrl}/categories/${id}`, { category_name: updatedName });
 
       setCategories((prev) =>
         prev.map((category) =>
@@ -97,7 +97,7 @@ const AddCategory = () => {
 
     if (confirmDelete.isConfirmed) {
       try {
-        await axios.delete(`${apiUrl}/${id}`);
+        await axios.delete(`${apiUrl}/categories/${id}`);
         setCategories((prev) =>
           prev.filter((category) => category.category_id !== id)
         );
