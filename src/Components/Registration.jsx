@@ -419,7 +419,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/categories`)
+    fetch(`${import.meta.env.VITE_API_URL}categories`)
       .then((res) => res.json())
       .then(setCategories)
       .catch(console.error);

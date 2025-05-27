@@ -92,7 +92,7 @@ const Ddashinner = () => {
   useEffect(() => {
     // Fetch categories (no dependencies, fetch immediately)
     api
-      .get(`/categories`)
+      .get(`categories`)
       .then((response) => {
         setCategories(response.data);
         localStorage.setItem(
