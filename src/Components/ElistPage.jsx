@@ -23,7 +23,7 @@ const ElistPage = () => {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}documents/list `)
+      .get(`${import.meta.env.VITE_API_URL}/documents/list `)
       .then((response) => {
         const sortedDocuments = response.data.documents.sort(
           (a, b) => new Date(b.uploaded_at) - new Date(a.uploaded_at)
@@ -33,17 +33,17 @@ const ElistPage = () => {
       .catch((error) => console.error("Error fetching documents:", error));
 
     axios
-      .get(`${import.meta.env.VITE_API_URL}users/distributors`)
+      .get(`${import.meta.env.VITE_API_URL}/users/distributors`)
       .then((response) => setDistributors(response.data))
       .catch((error) => console.error("Error fetching distributors:", error));
 
     axios
-      .get(`${import.meta.env.VITE_API_URL}certificates`)
+      .get(`${import.meta.env.VITE_API_URL}/certificates`)
       .then((response) => setCertificates(response.data))
       .catch((error) => console.error("Error fetching certificates:", error));
 
     axios
-      .get(`${import.meta.env.VITE_API_URL}users/register`)
+      .get(`${import.meta.env.VITE_API_URL}/users/register`)
       .then((response) => setUsers(response.data))
       .catch((error) => console.error("Error fetching users:", error));
   }, []);
@@ -122,7 +122,7 @@ const ElistPage = () => {
     if (!certificateId) return alert("Certificate not found.");
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}certificates/${certificateId}`
+        `${import.meta.env.VITE_API_URL}/certificates/${certificateId}`
       );
       if (response.data?.file_url) {
         window.open(response.data.file_url, "_blank");
@@ -138,7 +138,7 @@ const ElistPage = () => {
   const handleDownloadCertificate = async (documentId, name) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}download-certificate/${documentId}`,
+        `${import.meta.env.VITE_API_URL}/download-certificate/${documentId}`,
         { responseType: "blob" }
       );
       const url = window.URL.createObjectURL(new Blob([response.data]));

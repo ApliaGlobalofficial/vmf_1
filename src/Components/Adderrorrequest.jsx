@@ -56,7 +56,7 @@ export default function AddCertificateRequestPage() {
 
     try {
       const resp = await axios.post(
-        `${import.meta.env.VITE_API_URL}request-errors/create`,
+        `${import.meta.env.VITE_API_URL}/request-errors/create`,
         formData
       );
       if (resp.status === 201 || resp.status === 200) {

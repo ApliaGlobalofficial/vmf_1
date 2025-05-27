@@ -228,7 +228,7 @@ const Customerdashboard = ({ children }) => {
     const fetchWallet = async () => {
       try {
         const authHeaders = { Authorization: `Bearer ${token}` };
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}wallet`, { headers: authHeaders });
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/wallet`, { headers: authHeaders });
         const num = parseFloat(res.data.balance);
         setWalletBalance(isNaN(num) ? 0 : num);
       } catch (err) {

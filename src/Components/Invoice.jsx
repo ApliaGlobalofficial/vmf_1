@@ -8,7 +8,7 @@ import Draggable from "react-draggable";
 import { useRef } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-const SMS_URL = `${import.meta.env.VITE_API_URL}sms/send`;
+const SMS_URL = `${import.meta.env.VITE_API_URL}/sms/send`;
 const SMS_SENDER = "918308178738"; // your LiveOne-registered “from” number
 
 const DocumentViewer = ({ filePath, onClose }) => {
@@ -99,14 +99,14 @@ const InvoicePage = () => {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}users/distributors`, authHeaders)
+      .get(`${import.meta.env.VITE_API_URL}/users/distributors`, authHeaders)
       .then((response) => setDistributors(response.data))
       .catch((error) => console.error("Error fetching distributors:", error));
   }, []);
   const fetchDocumentData = useCallback(async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}singledocument/documentby/${documentId}`
+        `${import.meta.env.VITE_API_URL}/singledocument/documentby/${documentId}`
         , authHeaders);
       const data = response.data.document;
       setDocumentData(data);
@@ -116,7 +116,7 @@ const InvoicePage = () => {
 
       if (category && subcategory) {
         const fieldNamesResponse = await axios.get(
-          `${import.meta.env.VITE_API_URL}field-names/${category}/${subcategory}`
+          `${import.meta.env.VITE_API_URL}/field-names/${category}/${subcategory}`
           , authHeaders);
         setDocumentNames(fieldNamesResponse.data);
       }
@@ -160,7 +160,7 @@ const InvoicePage = () => {
       console.log("Payload:", payload); // Debug: Log the payload
 
       const response = await axios.put(
-        `${import.meta.env.VITE_API_URL}documents/update-status/${documentId}`,
+        `${import.meta.env.VITE_API_URL}/documents/update-status/${documentId}`,
         payload,
         {
           ...authHeaders,
@@ -205,7 +205,7 @@ const InvoicePage = () => {
 
       // Make the API call to download the ZIP file with increased timeout
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}download/${documentId}`, authHeaders,
+        `${import.meta.env.VITE_API_URL}/download/${documentId}`, authHeaders,
         {
           responseType: "blob", // Handle binary data
           timeout: 60000, // Increase timeout to 60 seconds
@@ -362,7 +362,7 @@ const InvoicePage = () => {
       setIsProcessing(true);
 
       const assignResponse = await axios.put(
-        `${import.meta.env.VITE_API_URL}documents/assign-distributor/${documentId}`,
+        `${import.meta.env.VITE_API_URL}/documents/assign-distributor/${documentId}`,
          {
         distributor_id: distributorId,
         remark: distributorRemark,
@@ -373,7 +373,7 @@ const InvoicePage = () => {
       console.log("Assign Distributor Response:", assignResponse.data);
 
       const statusResponse = await axios.put(
-        `${import.meta.env.VITE_API_URL}documents/update-status/${documentId}`,
+        `${import.meta.env.VITE_API_URL}/documents/update-status/${documentId}`,
          {
         status: "Approved",
       }

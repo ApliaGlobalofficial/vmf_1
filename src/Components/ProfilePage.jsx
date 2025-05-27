@@ -10,7 +10,7 @@ import {
   isValidPassword,
 } from "../utils/formValidators"; // Import your validators
 
-const USER_API_BASE = `${import.meta.env.VITE_API_URL}users`;
+const USER_API_BASE = `${import.meta.env.VITE_API_URL}/users`;
 const PASSWORD_API = `${USER_API_BASE}/password`;
 export default function ProfilePage() {
   const [user, setUser] = useState(null);

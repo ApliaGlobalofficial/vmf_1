@@ -31,7 +31,7 @@ const Price = () => {
   // 1) load prices
   const fetchPrices = async () => {
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}prices`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/prices`);
       setPrices(data.map((p) => ({ ...p, amount: Number(p.amount) })));
     } catch {
       Swal.fire("Error", "Could not load prices", "error");
@@ -41,7 +41,7 @@ const Price = () => {
   // 2) load categories + build master subcategory list
   const fetchCategoriesAndAllSubcats = async () => {
     try {
-      const { data: cats } = await axios.get( `${import.meta.env.VITE_API_URL}categories`      );
+      const { data: cats } = await axios.get( `${import.meta.env.VITE_API_URL}/categories`      );
       setCategories(cats);
 
       const all = [];
@@ -49,7 +49,7 @@ const Price = () => {
       await Promise.all(
         cats.map(async (cat) => {
           const { data: subs } = await axios.get(
-            `${import.meta.env.VITE_API_URL}subcategories/category/${cat.category_id}`
+            `${import.meta.env.VITE_API_URL}/subcategories/category/${cat.category_id}`
           );
           all.push(...subs);
         })
@@ -68,7 +68,7 @@ const Price = () => {
     }
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}subcategories/category/${categoryId}`
+        `${import.meta.env.VITE_API_URL}/subcategories/category/${categoryId}`
       );
       setSubcategories(data);
     } catch {
@@ -117,7 +117,7 @@ const Price = () => {
     });
     if (!confirm.isConfirmed) return;
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}prices/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/prices/${id}`);
       setPrices((p) => p.filter((x) => x.id !== id));
       Swal.fire("Deleted!", "", "success");
     } catch {
@@ -139,10 +139,10 @@ const Price = () => {
         distributable_amount: parseFloat(distributable_amount),
       };
       if (editId) {
-        await axios.put(`${import.meta.env.VITE_API_URL}prices/${editId}`, payload);
+        await axios.put(`${import.meta.env.VITE_API_URL}/prices/${editId}`, payload);
         Swal.fire("Updated!", "", "success");
       } else {
-        await axios.post(`${import.meta.env.VITE_API_URL}prices`, payload);
+        await axios.post(`${import.meta.env.VITE_API_URL}/prices`, payload);
         Swal.fire("Added!", "", "success");
       }
       setModalOpen(false);

@@ -28,7 +28,7 @@ const CompletedApplicationsList = () => {
     const fetchCompletedDocuments = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}userdashboard/completed/${userId}`
+          `${import.meta.env.VITE_API_URL}/userdashboard/completed/${userId}`
         );
         const sortedDocs = response.data.sort(
           (a, b) => new Date(b.uploaded_at) - new Date(a.uploaded_at)
@@ -42,7 +42,7 @@ const CompletedApplicationsList = () => {
     const fetchCertificates = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}certificates`
+          `${import.meta.env.VITE_API_URL}/certificates`
         );
         setCertificates(response.data);
       } catch (error) {
@@ -80,7 +80,7 @@ const CompletedApplicationsList = () => {
 
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}certificates/${certificateId}`
+        `${import.meta.env.VITE_API_URL}/certificates/${certificateId}`
       );
 
       if (response.data && response.data.file_url) {

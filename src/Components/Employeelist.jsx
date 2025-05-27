@@ -21,7 +21,7 @@ const EmployeeList = () => {
   });
 
   const navigate = useNavigate();
-  const apiUrl = `${import.meta.env.VITE_API_URL}users`;
+  const apiUrl = `${import.meta.env.VITE_API_URL}/users`;
 
   useEffect(() => {
     fetchEmployees();

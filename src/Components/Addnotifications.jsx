@@ -23,7 +23,7 @@ const NotificationManager = () => {
   const fetchNotifications = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}notifications`
+        `${import.meta.env.VITE_API_URL}/notifications`
       ); // Adjust API URL as needed
       setNotifications(Array.isArray(response.data) ? response.data : []);
     } catch (err) {
@@ -49,7 +49,7 @@ const NotificationManager = () => {
         notification_date:
           newNotification.notification_date || new Date().toISOString(),
       };
-      await axios.post(`${import.meta.env.VITE_API_URL}notifications`, payload);
+      await axios.post(`${import.meta.env.VITE_API_URL}/notifications`, payload);
       fetchNotifications();
       setIsModalOpen(false);
       setNewNotification({
@@ -94,7 +94,7 @@ const NotificationManager = () => {
 
       // 2. **API call runs in background, not blocking UI**
       axios
-        .delete(`${import.meta.env.VITE_API_URL}notifications/${id}`)
+        .delete(`${import.meta.env.VITE_API_URL}/notifications/${id}`)
         .then(() => {
           fetchNotifications(); // Refresh list after deletion
         })
@@ -128,7 +128,7 @@ const NotificationManager = () => {
   const handleSaveEdit = async (id) => {
     try {
       await axios.put(
-        `${import.meta.env.VITE_API_URL}notifications/${id}`,
+        `${import.meta.env.VITE_API_URL}/notifications/${id}`,
         editData
       );
       setEditingId(null);
@@ -143,7 +143,7 @@ const NotificationManager = () => {
     try {
       const newStatus = currentStatus === "Active" ? "Inactive" : "Active";
       await axios.patch(
-        `${import.meta.env.VITE_API_URL}notifications/status/${id}`,
+        `${import.meta.env.VITE_API_URL}/notifications/status/${id}`,
         {
           notification_status: newStatus,
         }

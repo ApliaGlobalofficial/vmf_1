@@ -6,8 +6,8 @@ const ContactForm = () => {
   const [formValues, setFormValues] = useState({}); // Stores key-value pairs for the Contact API
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false); // State to track form submission
-  const fieldApiUrl = `${import.meta.env.VITE_API_URL}field`; // API to fetch keys
-  const contactApiUrl = `${import.meta.env.VITE_API_URL}contact`; // API to save key-value pairs
+  const fieldApiUrl = `${import.meta.env.VITE_API_URL}/field`; // API to fetch keys
+  const contactApiUrl = `${import.meta.env.VITE_API_URL}/contact`; // API to save key-value pairs
 
   // Fetch keys from the Field API
   useEffect(() => {

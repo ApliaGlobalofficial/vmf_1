@@ -33,7 +33,7 @@ const Employee = () => {
   const fetchDocuments = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}employee`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/employee`);
       setDocuments(response.data);
     } catch (error) {
       console.error("Error fetching documents:", error);
@@ -49,7 +49,7 @@ const Employee = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}categories`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/categories`);
       setCategories(response.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -61,7 +61,7 @@ const Employee = () => {
     try {
       // Using the same endpoint as in EmployeeList component
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}users/employee`
+        `${import.meta.env.VITE_API_URL}/users/employee`
       );
       setEmployees(response.data);
     } catch (error) {
@@ -93,7 +93,7 @@ const Employee = () => {
     if (selectedCategoryId) {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}subcategories/category/${selectedCategoryId}`
+          `${import.meta.env.VITE_API_URL}/subcategories/category/${selectedCategoryId}`
         );
         setSubcategories(response.data);
       } catch (error) {
@@ -160,7 +160,7 @@ const Employee = () => {
           },
         });
 
-        await axios.delete(`${import.meta.env.VITE_API_URL}employee/${id}`);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/employee/${id}`);
 
         setDocuments((prevDocuments) =>
           prevDocuments.filter((document) => document.id !== id)
@@ -190,7 +190,7 @@ const Employee = () => {
 
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}subcategories/category/${groupedDoc.category_id}`
+        `${import.meta.env.VITE_API_URL}/subcategories/category/${groupedDoc.category_id}`
       );
       setSubcategories(response.data);
     } catch (error) {
@@ -231,12 +231,12 @@ const Employee = () => {
       if (editId) {
         // For edit, use the PUT endpoint with the new API format
         await axios.put(
-          `${import.meta.env.VITE_API_URL}employee/${editId}`,
+          `${import.meta.env.VITE_API_URL}/employee/${editId}`,
           dataToSend
         );
       } else {
         // For create, use the POST endpoint with the new API format
-        await axios.post(`${import.meta.env.VITE_API_URL}employee`, dataToSend);
+        await axios.post(`${import.meta.env.VITE_API_URL}/employee`, dataToSend);
       }
 
       Swal.fire({

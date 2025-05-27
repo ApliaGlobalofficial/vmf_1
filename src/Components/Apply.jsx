@@ -10,7 +10,7 @@ import {
   FaTimes,
 } from "react-icons/fa";
 
-const SMS_URL = `${import.meta.env.VITE_API_URL}sms/send`;
+const SMS_URL = `${import.meta.env.VITE_API_URL}/sms/send`;
 const SMS_SENDER = "918308178738"; // your LiveOne-registered "from" number
 
 const Apply = () => {

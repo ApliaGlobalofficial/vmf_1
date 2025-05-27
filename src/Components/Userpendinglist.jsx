@@ -38,7 +38,7 @@ const Userpendinglist = () => {
     const allowedStatuses = ["Pending"];
 
     axios
-      .get(`${import.meta.env.VITE_API_URL}documents/list`)
+      .get(`${import.meta.env.VITE_API_URL}/documents/list`)
       .then((response) => {
         const allDocuments = response.data.documents;
         const filteredDocs = allDocuments
@@ -53,7 +53,7 @@ const Userpendinglist = () => {
 
     // Fetch certificates
     axios
-      .get(`${import.meta.env.VITE_API_URL}certificates`)
+      .get(`${import.meta.env.VITE_API_URL}/certificates`)
       .then((response) => setCertificates(response.data))
       .catch((error) => console.error("Error fetching certificates:", error));
   }, [userId]);
@@ -86,7 +86,7 @@ const Userpendinglist = () => {
           formData.append("documentType", documentType);
 
           const response = await axios.post(
-            ` ${import.meta.env.VITE_API_URL}documents/reupload/${documentId}`,
+            ` ${import.meta.env.VITE_API_URL}/documents/reupload/${documentId}`,
             formData,
             {
               headers: {
@@ -155,7 +155,7 @@ const Userpendinglist = () => {
 
     try {
       const response = await axios.get(
-        ` ${import.meta.env.VITE_API_URL}certificates/${certificate.certificate_id}`
+        ` ${import.meta.env.VITE_API_URL}/certificates/${certificate.certificate_id}`
       );
       if (response.data && response.data.file_url) {
         newTab.location.href = response.data.file_url;

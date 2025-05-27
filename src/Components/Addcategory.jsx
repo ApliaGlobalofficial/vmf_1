@@ -12,7 +12,7 @@ const AddCategory = () => {
   const [isAdding, setIsAdding] = useState(false);
   const navigate = useNavigate();
 
-  const apiUrl = `${import.meta.env.VITE_API_URL}categories`;
+  const apiUrl = `${import.meta.env.VITE_API_URL}/categories`;
 
   useEffect(() => {
     fetchCategories();

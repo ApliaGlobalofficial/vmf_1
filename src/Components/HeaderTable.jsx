@@ -10,7 +10,7 @@ const HeaderTable = () => {
   const [editingItem, setEditingItem] = useState(null);
 
   const navigate = useNavigate();
-  const apiUrl = `${import.meta.env.VITE_API_URL}header`;
+  const apiUrl = `${import.meta.env.VITE_API_URL}/header`;
 
   useEffect(() => {
     fetchHeaders();

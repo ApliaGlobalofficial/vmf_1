@@ -16,7 +16,7 @@ const SendMoney = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}wallet_request/send/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/wallet_request/send/${id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

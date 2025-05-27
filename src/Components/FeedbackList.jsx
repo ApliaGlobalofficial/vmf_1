@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { FaTag, FaEdit, FaTrash, FaPlus, FaTimes } from "react-icons/fa";
 
-const API_BASE = `${import.meta.env.VITE_API_URL}feedback`;
+const API_BASE = `${import.meta.env.VITE_API_URL}/feedback`;
 
 const FeedbackList = () => {
   const [feedbackList, setFeedbackList] = useState([]);

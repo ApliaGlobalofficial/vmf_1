@@ -66,8 +66,8 @@ const VerifyDocuments = () => {
   const fetchCertificatesAndDocuments = async (userId) => {
     try {
       const [certRes, docRes] = await Promise.all([
-        axios.get(`${import.meta.env.VITE_API_URL}certificates`, authHeaders),
-        axios.get(`${import.meta.env.VITE_API_URL}documents/list/${userId}`, authHeaders),
+        axios.get(`${import.meta.env.VITE_API_URL}/certificates`, authHeaders),
+        axios.get(`${import.meta.env.VITE_API_URL}/documents/list/${userId}`, authHeaders),
       ]);
 
       const certs = certRes.data;
@@ -101,7 +101,7 @@ const VerifyDocuments = () => {
   const fetchCertificates = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}certificates`, authHeaders
+        `${import.meta.env.VITE_API_URL}/certificates`, authHeaders
       );
       // assume response.data is an array of certificate objects
       setCertificates(response.data);
@@ -139,7 +139,7 @@ const VerifyDocuments = () => {
   const fetchDocuments = async (distributorId) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}documents/list/${distributorId}`, authHeaders
+        `${import.meta.env.VITE_API_URL}/documents/list/${distributorId}`, authHeaders
       );
       const filtered = response.data.documents.filter(
         (doc) => doc.status !== "Sent"
@@ -198,7 +198,7 @@ const VerifyDocuments = () => {
 
     try {
       await axios.post(
-        `${import.meta.env.VITE_API_URL}certificates/upload`, 
+        `${import.meta.env.VITE_API_URL}/certificates/upload`, 
         formData,
         {
           headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${localStorage.getItem("token")}`},
@@ -208,7 +208,7 @@ const VerifyDocuments = () => {
       // re-fetch certificates and update document status
       await fetchCertificates();
       await axios.put(
-        `${import.meta.env.VITE_API_URL}documents/update-status/${documentId}`, 
+        `${import.meta.env.VITE_API_URL}/documents/update-status/${documentId}`, 
         { status: "Uploaded" },authHeaders
       );
       setDocuments((p) =>
@@ -234,7 +234,7 @@ const VerifyDocuments = () => {
       return Swal.fire("Error", "Certificate not found", "error");
     try {
       const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}certificates/${certificateId}`, authHeaders
+        `${import.meta.env.VITE_API_URL}/certificates/${certificateId}`, authHeaders
       );
       if (res.data.file_url) window.open(res.data.file_url, "_blank");
       else Swal.fire("Error", "Certificate file not found", "error");

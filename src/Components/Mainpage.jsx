@@ -95,7 +95,7 @@ const PurpleBanner = () => {
   const [description, setDescription] = useState("");
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}header`)
+      .get(`${import.meta.env.VITE_API_URL}/header`)
       .then((res) =>
         setDescription(
           res.data[0]?.description || "Welcome to our website! 📞 0998766534"
@@ -124,7 +124,7 @@ const Footer = () => {
   const [contactInfo, setContactInfo] = useState(null);
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}contact-info`)
+      .get(`${import.meta.env.VITE_API_URL}/contact-info`)
       .then((res) => setContactInfo(res.data[0] || {}))
       .catch(() => setContactInfo(null));
   }, []);
@@ -210,12 +210,12 @@ const Mainpage = () => {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}document-types`)
+      .get(`${import.meta.env.VITE_API_URL}/document-types`)
       .then((res) => setDocumentTypes(res.data))
       .catch(() => setError("Failed to load documents"));
 
     axios
-      .get(`${import.meta.env.VITE_API_URL}news`)
+      .get(`${import.meta.env.VITE_API_URL}/news`)
       .then((res) => setNewsList(res.data))
       .catch(() => setError("Failed to load news"))
       .finally(() => setLoading(false));

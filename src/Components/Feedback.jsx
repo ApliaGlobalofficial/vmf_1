@@ -49,7 +49,7 @@ const Feedback = () => {
     }
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}feedback`, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/feedback`, {
         comment,
         rating,
         user_id: storedUser.user_id, // ✅ Extract user_id correctly

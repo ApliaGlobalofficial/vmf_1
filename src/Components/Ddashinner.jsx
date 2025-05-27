@@ -18,7 +18,7 @@ import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 // Base URL for API calls
-const BASE_URL = `${import.meta.env.VITE_API_URL}`;
+const BASE_URL = `${import.meta.env.VITE_API_URL}/`;
 
 // Configure axios for faster responses
 axios.defaults.timeout = 5000; // 5 second timeout

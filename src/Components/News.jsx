@@ -174,7 +174,7 @@ const News = () => {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}news`)
+      .get(`${import.meta.env.VITE_API_URL}/news`)
       .then((res) => setNewsList(res.data))
       .catch((err) => {
         console.error(err);

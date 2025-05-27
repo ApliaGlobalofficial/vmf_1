@@ -11,7 +11,7 @@ const NewsTable = () => {
   const [editingItem, setEditingItem] = useState(null);
 
   const navigate = useNavigate();
-  const apiUrl = `${import.meta.env.VITE_API_URL}news`;
+  const apiUrl = `${import.meta.env.VITE_API_URL}/news`;
 
   useEffect(() => {
     fetchNews();

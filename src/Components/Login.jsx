@@ -11,14 +11,14 @@ const Login = () => {
   const [subcategories, setSubcategories] = useState({});
   const navigate = useNavigate();
   // src/pages/Login.jsx
-  const SMS_URL = `${import.meta.env.VITE_API_URL}sms/send`;
+  const SMS_URL = `${import.meta.env.VITE_API_URL}/sms/send`;
   const SMS_SENDER = "918308178738"; // your LiveOne “from” number
 
   // Fetch categories
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}categories`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/categories`);
         if (!response.ok) throw new Error("Failed to fetch categories");
         setCategories(await response.json());
       } catch (error) {
@@ -35,7 +35,7 @@ const Login = () => {
       try {
         for (const cat of categories) {
           const resp = await fetch(
-            `${import.meta.env.VITE_API_URL}subcategories/category/${cat.category_id}`
+            `${import.meta.env.VITE_API_URL}/subcategories/category/${cat.category_id}`
           );
           result[cat.category_id] = resp.ok ? await resp.json() : [];
         }
@@ -61,7 +61,7 @@ const Login = () => {
     e.preventDefault();
     try {
       // ① Authenticate
-      const resp = await fetch(`${import.meta.env.VITE_API_URL}users/login`, {
+      const resp = await fetch(`${import.meta.env.VITE_API_URL}/users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -117,7 +117,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const resp = await fetch(
-        `${import.meta.env.VITE_API_URL}users/forgot-password`,
+        `${import.meta.env.VITE_API_URL}/users/forgot-password`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

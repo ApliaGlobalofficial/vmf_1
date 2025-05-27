@@ -9,7 +9,7 @@ const TermsAndConditions = () => {
     const fetchTnC = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}privacy-policy/type/` +
+          `${import.meta.env.VITE_API_URL}/privacy-policy/type/` +
             encodeURIComponent("Terms and Conditions")
         );
         const data = response.data;

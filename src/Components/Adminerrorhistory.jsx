@@ -22,7 +22,7 @@ const ErrorRequests = () => {
   const fetchErrorRequests = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}request-errors`
+        `${import.meta.env.VITE_API_URL}/request-errors`
       );
       setErrorRequests(response.data);
     } catch (error) {
@@ -34,7 +34,7 @@ const ErrorRequests = () => {
   const fetchCertificates = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}certificates`
+        `${import.meta.env.VITE_API_URL}/certificates`
       );
       setCertificates(response.data);
     } catch (error) {
@@ -59,7 +59,7 @@ const ErrorRequests = () => {
     }
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}certificates/${certificateId}`
+        `${import.meta.env.VITE_API_URL}/certificates/${certificateId}`
       );
       if (response.data && response.data.file_url) {
         window.open(response.data.file_url, "_blank");
@@ -75,7 +75,7 @@ const ErrorRequests = () => {
   const handleDownloadCertificate = async (documentId, requestName) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}download-certificate/${documentId}`,
+        `${import.meta.env.VITE_API_URL}/download-certificate/${documentId}`,
         {
           responseType: "blob", // Important to handle file downloads
         }

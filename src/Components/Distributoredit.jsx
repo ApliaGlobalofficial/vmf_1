@@ -14,7 +14,7 @@ const DistributorEdit = () => {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}users/edit/${user_id}`)
+      .get(`${import.meta.env.VITE_API_URL}/users/edit/${user_id}`)
       .then((response) => {
         setFormData(response.data);
       })
@@ -30,7 +30,7 @@ const DistributorEdit = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`${import.meta.env.VITE_API_URL}users/edit/${user_id}`, formData)
+      .put(`${import.meta.env.VITE_API_URL}/users/edit/${user_id}`, formData)
       .then(() => {
         alert("Distributor updated successfully!");
         navigate("/distributor-list"); // Redirect after update

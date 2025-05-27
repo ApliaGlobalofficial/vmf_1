@@ -40,7 +40,7 @@ const token = localStorage.getItem("token");
   useEffect(() => {
     if (userId) {
       axios
-        .get(` ${import.meta.env.VITE_API_URL}documents/list`, authHeaders)
+        .get(` ${import.meta.env.VITE_API_URL}/documents/list`, authHeaders)
         .then((response) => {
           const allDocuments = response.data.documents;
           // Filter documents where status is "Completed"
@@ -54,7 +54,7 @@ const token = localStorage.getItem("token");
         .catch((error) => console.error("Error fetching documents:", error));
 
       axios
-        .get(` ${import.meta.env.VITE_API_URL}certificates`, authHeaders)
+        .get(` ${import.meta.env.VITE_API_URL}/certificates`, authHeaders)
         .then((response) => setCertificates(response.data))
         .catch((error) => console.error("Error fetching certificates:", error));
     }
@@ -141,7 +141,7 @@ const token = localStorage.getItem("token");
 
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}certificates/${certificateId}` , authHeaders
+        `${import.meta.env.VITE_API_URL}/certificates/${certificateId}` , authHeaders
       );
 
       if (response.data && response.data.file_url) {
@@ -207,7 +207,7 @@ const token = localStorage.getItem("token");
   const handleDownloadCertificate = async (documentId, name) => {
     try {
       const response = await axios.get(
-        ` ${import.meta.env.VITE_API_URL}download-certificate/${documentId}`, authHeaders,
+        ` ${import.meta.env.VITE_API_URL}/download-certificate/${documentId}`, authHeaders,
         {
           responseType: "blob", // Important to handle file downloads
         }

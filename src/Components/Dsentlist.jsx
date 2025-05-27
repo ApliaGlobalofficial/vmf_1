@@ -46,7 +46,7 @@ const token = localStorage.getItem("token");
   const fetchDocuments = async (distributorId) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}documents/list/${distributorId}` , authHeaders
+        `${import.meta.env.VITE_API_URL}/documents/list/${distributorId}` , authHeaders
       );
 
       // Filter documents with status "Sent" and sort by `uploaded_at` in descending order
@@ -65,7 +65,7 @@ const token = localStorage.getItem("token");
     try {
       console.log("Fetching certificates...");
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}certificates` , authHeaders
+        `${import.meta.env.VITE_API_URL}/certificates` , authHeaders
       ); // Adjust URL if needed
       console.log("Certificates API Response:", response.data);
       setCertificates(response.data);
@@ -95,7 +95,7 @@ const token = localStorage.getItem("token");
         `Fetching certificate for Certificate ID: ${certificate.certificate_id}`
       );
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}certificates/${certificate.certificate_id}`, authHeaders
+        `${import.meta.env.VITE_API_URL}/certificates/${certificate.certificate_id}`, authHeaders
       );
       console.log("View Certificate API Response:", response.data);
 
@@ -153,7 +153,7 @@ const token = localStorage.getItem("token");
   const handleDownloadCertificate = async (documentId, name) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}download-certificate/${documentId}`, authHeaders,
+        `${import.meta.env.VITE_API_URL}/download-certificate/${documentId}`, authHeaders,
         {
           responseType: "blob", // Important to handle file downloads
         }

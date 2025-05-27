@@ -19,7 +19,7 @@
 //       return;
 //     }
 
-//     fetch(`${import.meta.env.VITE_API_URL}wallet_request", {
+//     fetch(`${import.meta.env.VITE_API_URL}/wallet_request", {
 //       headers: {
 //         "Content-Type": "application/json",
 //         Authorization: `Bearer ${token}`,
@@ -50,7 +50,7 @@
 //     const token = localStorage.getItem("token");
 
 //     try {
-//       const res = await fetch(`${import.meta.env.VITE_API_URL}wallet_request/${id}`, {
+//       const res = await fetch(`${import.meta.env.VITE_API_URL}/wallet_request/${id}`, {
 //         method: "PATCH",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -178,7 +178,7 @@ const RequestedMoney = () => {
       return;
     }
 
-    fetch(`${import.meta.env.VITE_API_URL}wallet_request`, {
+    fetch(`${import.meta.env.VITE_API_URL}/wallet_request`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

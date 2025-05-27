@@ -9,7 +9,7 @@ import {
   FaTimes,
 } from "react-icons/fa";
 
-const GUIDE_API_URL = `${import.meta.env.VITE_API_URL}images`;
+const GUIDE_API_URL = `${import.meta.env.VITE_API_URL}/images`;
 
 export default function Guide() {
   const [images, setImages] = useState([]);

@@ -50,7 +50,7 @@ const InvoicePage = () => {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}users/distributors`)
+      .get(`${import.meta.env.VITE_API_URL}/users/distributors`)
       .then((response) => setDistributors(response.data))
       .catch((error) => console.error("Error fetching distributors:", error));
   }, []);
@@ -74,7 +74,7 @@ const InvoicePage = () => {
 
     try {
       await axios.put(
-        `${import.meta.env.VITE_API_URL}documents/update-status/${documentId}`,
+        `${import.meta.env.VITE_API_URL}/documents/update-status/${documentId}`,
         {
           status: newStatus,
           rejectionReason:
@@ -115,7 +115,7 @@ const InvoicePage = () => {
 
       // Make the API call to download the ZIP file with increased timeout
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}download/${documentId}`,
+        `${import.meta.env.VITE_API_URL}/download/${documentId}`,
         {
           responseType: "blob", // Handle binary data
           timeout: 60000, // Increase timeout to 60 seconds
@@ -254,7 +254,7 @@ const InvoicePage = () => {
     if (!distributorId) return;
     try {
       await axios.put(
-        `${import.meta.env.VITE_API_URL}documents/assign-distributor/${documentId}`,
+        `${import.meta.env.VITE_API_URL}/documents/assign-distributor/${documentId}`,
         {
           distributor_id: distributorId,
         }
@@ -291,7 +291,7 @@ const InvoicePage = () => {
     try {
       console.log("Fetching certificates...");
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}certificates`,
+        `${import.meta.env.VITE_API_URL}/certificates`,
         {
           timeout: 30000,
         }
@@ -305,7 +305,7 @@ const InvoicePage = () => {
   const fetchDocumentData = useCallback(async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}singledocument/documentby/${documentId}`
+        `${import.meta.env.VITE_API_URL}/singledocument/documentby/${documentId}`
       );
       const data = response.data.document;
       setDocumentData(data);
@@ -315,7 +315,7 @@ const InvoicePage = () => {
 
       if (category && subcategory) {
         const fieldNamesResponse = await axios.get(
-          `${import.meta.env.VITE_API_URL}field-names/${category}/${subcategory}`
+          `${import.meta.env.VITE_API_URL}/field-names/${category}/${subcategory}`
         );
         setDocumentNames(fieldNamesResponse.data);
       }
@@ -382,7 +382,7 @@ const InvoicePage = () => {
 
       try {
         const { data: updatedDocument } = await axios.post(
-          `${import.meta.env.VITE_API_URL}documents/reupload/${documentId}`,
+          `${import.meta.env.VITE_API_URL}/documents/reupload/${documentId}`,
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );

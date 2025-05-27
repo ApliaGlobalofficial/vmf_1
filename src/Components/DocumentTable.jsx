@@ -22,7 +22,7 @@ const DocumentTable = () => {
   const fetchDocuments = async () => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}document-types`
+        `${import.meta.env.VITE_API_URL}/document-types`
       );
       setDocuments(data);
     } catch (error) {
@@ -38,12 +38,12 @@ const DocumentTable = () => {
     try {
       if (editingDoc) {
         await axios.put(
-          `${import.meta.env.VITE_API_URL}document-types/${editingDoc.doc_type_id}`,
+          `${import.meta.env.VITE_API_URL}/document-types/${editingDoc.doc_type_id}`,
           formData
         );
       } else {
         await axios.post(
-          `${import.meta.env.VITE_API_URL}document-types/`,
+          `${import.meta.env.VITE_API_URL}/document-types/`,
           formData
         );
       }
@@ -70,7 +70,7 @@ const DocumentTable = () => {
     });
     if (res.isConfirmed) {
       try {
-        await axios.delete(`${import.meta.env.VITE_API_URL}document-types/${id}`);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/document-types/${id}`);
         fetchDocuments();
         Swal.fire("Deleted!", "Document has been deleted.", "success");
       } catch {

@@ -43,7 +43,7 @@ const UserTable = () => {
   });
   const navigate = useNavigate();
 
-  const apiUrl = `${import.meta.env.VITE_API_URL}users/distributors`;
+  const apiUrl = `${import.meta.env.VITE_API_URL}/users/distributors`;
 
   useEffect(() => {
     fetchDistributors();
@@ -66,7 +66,7 @@ const UserTable = () => {
   const checkEmailExists = async (email) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}users/check-email/${email}`,
+        `${import.meta.env.VITE_API_URL}/users/check-email/${email}`,
         { timeout: 30000 }
       );
       return response.data.exists;
@@ -296,7 +296,7 @@ const UserTable = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}users/register`,
+        `${import.meta.env.VITE_API_URL}/users/register`,
         formDataToSend,
         {
           headers: {
@@ -347,7 +347,7 @@ const UserTable = () => {
     try {
       if (updatedPassword) {
         await axios.patch(
-          `${import.meta.env.VITE_API_URL}users/password/${id}`,
+          `${import.meta.env.VITE_API_URL}/users/password/${id}`,
           { newPassword: updatedPassword },
           { timeout: 30000 }
         );
@@ -410,7 +410,7 @@ const UserTable = () => {
       });
 
       try {
-        await axios.delete(`${import.meta.env.VITE_API_URL}users/delete/${id}`, {
+        await axios.delete(`${import.meta.env.VITE_API_URL}/users/delete/${id}`, {
           timeout: 30000,
         });
 
@@ -444,7 +444,7 @@ const UserTable = () => {
       );
 
       await axios.patch(
-        `${import.meta.env.VITE_API_URL}users/status/${id}`,
+        `${import.meta.env.VITE_API_URL}/users/status/${id}`,
         { status: newStatus },
         { timeout: 30000 }
       );
@@ -467,7 +467,7 @@ const UserTable = () => {
   };
   const updateEditRequestStatus = async (id, newStatus) => {
     try {
-      await axios.patch(`${import.meta.env.VITE_API_URL}users/request-edit/${id}`, {
+      await axios.patch(`${import.meta.env.VITE_API_URL}/users/request-edit/${id}`, {
         status: newStatus,
       });
       setDistributors((prev) =>

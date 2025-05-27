@@ -66,7 +66,7 @@ const RegisterDocument = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}users/update/${id}`,
+        `${import.meta.env.VITE_API_URL}/users/update/${id}`,
         {
           method: "PUT",
           body: formDataObj,

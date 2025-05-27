@@ -21,12 +21,12 @@ const RecentApplications = () => {
 
   useEffect(() => {
     // Fetch all data in parallel
-    const docsReq = axios.get(`${import.meta.env.VITE_API_URL}documents/recent`, {
+    const docsReq = axios.get(`${import.meta.env.VITE_API_URL}/documents/recent`, {
       timeout: 120000,
     });
-    const distReq = axios.get(`${import.meta.env.VITE_API_URL}users/distributors`);
-    const certReq = axios.get(`${import.meta.env.VITE_API_URL}certificates`);
-    const usersReq = axios.get(`${import.meta.env.VITE_API_URL}users/register`);
+    const distReq = axios.get(`${import.meta.env.VITE_API_URL}/users/distributors`);
+    const certReq = axios.get(`${import.meta.env.VITE_API_URL}/certificates`);
+    const usersReq = axios.get(`${import.meta.env.VITE_API_URL}/users/register`);
 
     Promise.all([docsReq, distReq, certReq, usersReq])
       .then(([docsResp, distResp, certResp, usersResp]) => {
@@ -76,7 +76,7 @@ const RecentApplications = () => {
     });
     try {
       await axios.put(
-        `${import.meta.env.VITE_API_URL}documents/update-status/${documentId}`,
+        `${import.meta.env.VITE_API_URL}/documents/update-status/${documentId}`,
         { status: newStatus },
         { timeout: 30000 }
       );
@@ -102,7 +102,7 @@ const RecentApplications = () => {
     if (reason) {
       try {
         await axios.put(
-          `${import.meta.env.VITE_API_URL}documents/update-status/${documentId}`,
+          `${import.meta.env.VITE_API_URL}/documents/update-status/${documentId}`,
           { status: "Rejected", rejectionReason: reason }
         );
         setApplications((apps) =>
@@ -351,7 +351,7 @@ const RecentApplications = () => {
                               doc.document_id
                             );
                             window.open(
-                              `${import.meta.env.VITE_API_URL}certificates/${certId}`,
+                              `${import.meta.env.VITE_API_URL}/certificates/${certId}`,
                               "_blank"
                             );
                           }}

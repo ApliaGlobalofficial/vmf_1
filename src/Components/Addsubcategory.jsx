@@ -27,7 +27,7 @@ const Addsubcategory = () => {
 
   const fetchSubcategories = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}subcategories`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/subcategories`);
       setSubcategories(response.data);
     } catch (error) {
       console.error("Error fetching subcategories:", error);
@@ -36,7 +36,7 @@ const Addsubcategory = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}categories`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/categories`);
       setCategories(response.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -52,7 +52,7 @@ const Addsubcategory = () => {
       return;
     }
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}subcategories`, newSubcategory);
+      await axios.post(`${import.meta.env.VITE_API_URL}/subcategories`, newSubcategory);
       setNewSubcategory({ subcategory_name: "", category_id: "" });
       setIsAdding(false);
       fetchSubcategories();
@@ -75,7 +75,7 @@ const Addsubcategory = () => {
     }
 
     try {
-      await axios.patch(`${import.meta.env.VITE_API_URL}subcategories/${id}`, {
+      await axios.patch(`${import.meta.env.VITE_API_URL}/subcategories/${id}`, {
         subcategory_name: updatedName,
       });
 
@@ -119,7 +119,7 @@ const Addsubcategory = () => {
       Swal.fire("Deleted!", "Subcategory has been deleted.", "success");
 
       try {
-        await axios.delete(`${import.meta.env.VITE_API_URL}subcategories/${id}`);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/subcategories/${id}`);
         setSubcategories((prev) =>
           prev.filter((sub) => sub.subcategory_id !== id)
         );

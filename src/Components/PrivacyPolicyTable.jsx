@@ -15,7 +15,7 @@ const PrivacyPolicyTable = () => {
     policyType: "",
   });
 
-  const apiUrl = `${import.meta.env.VITE_API_URL}privacy-policy`;
+  const apiUrl = `${import.meta.env.VITE_API_URL}/privacy-policy`;
   const navigate = useNavigate();
 
   useEffect(() => {
