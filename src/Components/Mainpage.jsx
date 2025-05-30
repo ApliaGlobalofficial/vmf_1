@@ -95,7 +95,7 @@ const PurpleBanner = () => {
   const [description, setDescription] = useState("");
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}/header`)
+      .get(`${import.meta.env.VITE_API_URL}/api/header`)
       .then((res) =>
         setDescription(
           res.data[0]?.description || "Welcome to our website! 📞 0998766534"

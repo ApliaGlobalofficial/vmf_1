@@ -315,18 +315,18 @@ const Apply = () => {
       });
 
       // WhatsApp Logic (optional - replace with your actual WhatsApp API)
-      const whatsappMessage = `Hello ${formData.name}, your application for '${formData.subcategory_name}' has been submitted successfully.\n📄 Form Price: ₹${servicePrice}\n\nThank you for registering at Mazedakhale!`;
+      // const whatsappMessage = `Hello ${formData.name}, your application for '${formData.subcategory_name}' has been submitted successfully.\n📄 Form Price: ₹${servicePrice}\n\nThank you for registering at Mazedakhale!`;
 
       // Uncomment and replace with your actual WhatsApp API endpoint
 
-      await fetch("https://your-whatsapp-api.com/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          to: `+91${formData.phone}`,
-          message: whatsappMessage,
-        }),
-      });
+      // await fetch("https://your-whatsapp-api.com/send", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({
+      //     to: `+91${formData.phone}`,
+      //     message: whatsappMessage,
+      //   }),
+      // });
 
     } catch (error) {
       console.error("Error sending notifications:", error);
