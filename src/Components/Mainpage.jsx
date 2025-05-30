@@ -253,7 +253,7 @@ const Mainpage = () => {
 
       <section className="container mx-auto mt-8 px-4">
         <div className="flex gap-6">
-          <div className="w-3/5 grid grid-cols-2 gap-6">
+          {/* <div className="w-3/5 grid grid-cols-2 gap-6">
             {documentTypes?.slice(0, 4).map((doc) => {
               const Icon = iconMapping[doc.doc_type_name] || FaCertificate;
               return (
@@ -269,8 +269,22 @@ const Mainpage = () => {
                 </div>
               );
             })}
-          </div>
+          </div> */}
 
+          <div className="w-3/5 grid grid-cols-2 gap-6">
+            {Array.isArray(documentTypes) && documentTypes.slice(0, 4).map((doc) => {
+              const Icon = iconMapping[doc.doc_type_name] || FaCertificate;
+              return (
+                <div key={doc.doc_type_id} className="bg-white p-6 rounded-lg shadow hover:shadow-lg">
+                  <Icon className="text-[#F79711] text-3xl mb-2" />
+                  <h3 className="text-lg font-semibold">{doc.doc_type_name}</h3>
+                  <p className="text-gray-600 text-sm mt-1">
+                    Register your {doc.doc_type_name}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
           <div className="w-2/5 flex flex-col">
             <div className="bg-[#F79711] p-4 rounded-t-lg flex justify-between items-center">
               <h3 className="text-white font-bold">What's New</h3>
