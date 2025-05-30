@@ -303,7 +303,7 @@ const Mainpage = () => {
                 </button>
               </div>
             </div>
-            <div className="flex-1 bg-[#F79711]/10 p-4 overflow-y-auto">
+            {/* <div className="flex-1 bg-[#F79711]/10 p-4 overflow-y-auto">
               <marquee
                 ref={marqueeRef}
                 direction="up"
@@ -314,7 +314,22 @@ const Mainpage = () => {
                   <div key={n.id}>• {n.description}</div>
                 ))}
               </marquee>
-            </div>
+            </div> */}
+            <div className="flex-1 bg-[#F79711]/10 p-4 overflow-y-auto">
+  <marquee
+    ref={marqueeRef}
+    direction="up"
+    scrollamount="1"
+    className="space-y-2 text-gray-800 text-sm"
+  >
+    {Array.isArray(newsList)
+      ? newsList.slice(0, 5).map(n => (
+          <div key={n.id}>• {n.description}</div>
+        ))
+      : null}
+  </marquee>
+</div>
+
             <div className="bg-[#F79711] text-white text-right p-2 rounded-b-lg">
               <Link to="/news" className="font-semibold hover:underline">
                 View all &gt;&gt;
