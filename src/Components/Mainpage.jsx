@@ -316,19 +316,19 @@ const Mainpage = () => {
               </marquee>
             </div> */}
             <div className="flex-1 bg-[#F79711]/10 p-4 overflow-y-auto">
-  <marquee
-    ref={marqueeRef}
-    direction="up"
-    scrollamount="1"
-    className="space-y-2 text-gray-800 text-sm"
-  >
-    {Array.isArray(newsList)
-      ? newsList.slice(0, 5).map(n => (
-          <div key={n.id}>• {n.description}</div>
-        ))
-      : null}
-  </marquee>
-</div>
+              <marquee
+                ref={marqueeRef}
+                direction="up"
+                scrollamount="1"
+                className="space-y-2 text-gray-800 text-sm"
+              >
+                {Array.isArray(newsList)
+                  ? newsList.slice(0, 5).map(n => (
+                    <div key={n.id}>• {n.description}</div>
+                  ))
+                  : null}
+              </marquee>
+            </div>
 
             <div className="bg-[#F79711] text-white text-right p-2 rounded-b-lg">
               <Link to="/news" className="font-semibold hover:underline">
@@ -338,15 +338,12 @@ const Mainpage = () => {
           </div>
         </div>
 
-        {documentTypes.length > 4 && (
+        {Array.isArray(documentTypes) && documentTypes.length > 4 && (
           <div className="grid grid-cols-4 gap-6 mt-6">
-            {documentTypes?.slice(4).map((doc) => {
+            {documentTypes.slice(4).map(doc => {
               const Icon = iconMapping[doc.doc_type_name] || FaCertificate;
               return (
-                <div
-                  key={doc.doc_type_id}
-                  className="bg-white p-6 rounded-lg shadow hover:shadow-lg"
-                >
+                <div key={doc.doc_type_id} className="bg-white p-6 rounded-lg shadow hover:shadow-lg">
                   <Icon className="text-[#F79711] text-3xl mb-2" />
                   <h3 className="text-lg font-semibold">{doc.doc_type_name}</h3>
                   <p className="text-gray-600 text-sm mt-1">
