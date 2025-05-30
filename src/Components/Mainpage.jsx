@@ -253,7 +253,7 @@ const Mainpage = () => {
 
       <section className="container mx-auto mt-8 px-4">
         <div className="flex gap-6">
-          {/* <div className="w-3/5 grid grid-cols-2 gap-6">
+          <div className="w-3/5 grid grid-cols-2 gap-6">
             {documentTypes?.slice(0, 4).map((doc) => {
               const Icon = iconMapping[doc.doc_type_name] || FaCertificate;
               return (
@@ -269,22 +269,8 @@ const Mainpage = () => {
                 </div>
               );
             })}
-          </div> */}
-
-          <div className="w-3/5 grid grid-cols-2 gap-6">
-            {Array.isArray(documentTypes) && documentTypes.slice(0, 4).map((doc) => {
-              const Icon = iconMapping[doc.doc_type_name] || FaCertificate;
-              return (
-                <div key={doc.doc_type_id} className="bg-white p-6 rounded-lg shadow hover:shadow-lg">
-                  <Icon className="text-[#F79711] text-3xl mb-2" />
-                  <h3 className="text-lg font-semibold">{doc.doc_type_name}</h3>
-                  <p className="text-gray-600 text-sm mt-1">
-                    Register your {doc.doc_type_name}
-                  </p>
-                </div>
-              );
-            })}
           </div>
+
           <div className="w-2/5 flex flex-col">
             <div className="bg-[#F79711] p-4 rounded-t-lg flex justify-between items-center">
               <h3 className="text-white font-bold">What's New</h3>
@@ -303,7 +289,7 @@ const Mainpage = () => {
                 </button>
               </div>
             </div>
-            {/* <div className="flex-1 bg-[#F79711]/10 p-4 overflow-y-auto">
+            <div className="flex-1 bg-[#F79711]/10 p-4 overflow-y-auto">
               <marquee
                 ref={marqueeRef}
                 direction="up"
@@ -314,22 +300,7 @@ const Mainpage = () => {
                   <div key={n.id}>• {n.description}</div>
                 ))}
               </marquee>
-            </div> */}
-            <div className="flex-1 bg-[#F79711]/10 p-4 overflow-y-auto">
-              <marquee
-                ref={marqueeRef}
-                direction="up"
-                scrollamount="1"
-                className="space-y-2 text-gray-800 text-sm"
-              >
-                {Array.isArray(newsList)
-                  ? newsList.slice(0, 5).map(n => (
-                    <div key={n.id}>• {n.description}</div>
-                  ))
-                  : null}
-              </marquee>
             </div>
-
             <div className="bg-[#F79711] text-white text-right p-2 rounded-b-lg">
               <Link to="/news" className="font-semibold hover:underline">
                 View all &gt;&gt;
@@ -338,12 +309,15 @@ const Mainpage = () => {
           </div>
         </div>
 
-        {Array.isArray(documentTypes) && documentTypes.length > 4 && (
+        {documentTypes.length > 4 && (
           <div className="grid grid-cols-4 gap-6 mt-6">
-            {documentTypes.slice(4).map(doc => {
+            {documentTypes?.slice(4).map((doc) => {
               const Icon = iconMapping[doc.doc_type_name] || FaCertificate;
               return (
-                <div key={doc.doc_type_id} className="bg-white p-6 rounded-lg shadow hover:shadow-lg">
+                <div
+                  key={doc.doc_type_id}
+                  className="bg-white p-6 rounded-lg shadow hover:shadow-lg"
+                >
                   <Icon className="text-[#F79711] text-3xl mb-2" />
                   <h3 className="text-lg font-semibold">{doc.doc_type_name}</h3>
                   <p className="text-gray-600 text-sm mt-1">
