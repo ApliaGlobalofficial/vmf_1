@@ -36,7 +36,7 @@ const Addsubcategory = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/categories`);
       setCategories(response.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
