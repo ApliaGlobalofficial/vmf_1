@@ -100,6 +100,7 @@ import RequestedMoney from "./Components/RequestedMoney";
 import RequestHistory from "./Components/RequestHistory";
 import SendMoney from "./Components/SendMoney";
 import ProfilePageD from "./Components/ProfilePageD";
+import ApproveRequests from "./Components/ApproveRequests";
 function App() {
   return (
     <Router>
@@ -374,6 +375,14 @@ function App() {
           element={
             <Admindashboard>
               <RequestedMoney />
+            </Admindashboard>
+          }
+        />
+        <Route
+          path="/approverequests"
+          element={
+            <Admindashboard>
+              <ApproveRequests />
             </Admindashboard>
           }
         />
