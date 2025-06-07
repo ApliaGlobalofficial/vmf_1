@@ -203,7 +203,7 @@ const RequestedMoney = () => {
   return (
     <div className="min-h-screen bg-gray-100 pl-64 pr-4 pt-8">
       <div className="max-w-7xl mx-auto bg-white p-6 rounded-lg shadow">
-        <h2 className="text-2xl font-bold text-blue-700 mb-6 text-center">
+        <h2 className="text-2xl font-bold  mb-6 text-center">
           Requested Money - Distributor List
         </h2>
 
@@ -213,7 +213,7 @@ const RequestedMoney = () => {
         {!loading && !error && (
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-blue-600 text-white">
+              <thead className="bg-[#F88F2A] text-white">
                 <tr>
                   <th className="px-4 py-3 text-left">#</th>
                   <th className="px-4 py-3 text-left">Account No</th>
@@ -230,7 +230,7 @@ const RequestedMoney = () => {
                     <td className="px-4 py-2">{index + 1}</td>
                     <td className="px-4 py-2">{req.account_number}</td>
                     <td className="px-4 py-2">{req.ifsc_code}</td>
-                    <td className="px-4 py-2 font-semibold text-blue-700">₹ {req.requested_amount}</td>
+                    <td className="px-4 py-2 font-semibold">₹ {req.requested_amount}</td>
                     <td className="px-4 py-2">{req.requested_amount_date}</td>
                     <td className="px-4 py-2">
                       {editingId === req.id ? (
@@ -253,7 +253,7 @@ const RequestedMoney = () => {
                         </div>
                       ) : (
                         <span
-                          className="text-blue-600 cursor-pointer hover:underline"
+                          className="text-amber cursor-pointer hover:underline"
                           onClick={() => handleStatusClick(req.id, req.status)}
                         >
                           {req.status}
@@ -263,7 +263,7 @@ const RequestedMoney = () => {
                     <td className="px-4 py-2">
                       <button
                         onClick={() => handleSendMoney(req)}
-                        className="bg-indigo-500 text-white px-3 py-1 rounded text-xs hover:bg-indigo-600"
+                        className="bg-[#F88F2A] text-white px-3 py-1 rounded text-xs hover:bg-indigo-600"
                       >
                         Send Money
                       </button>

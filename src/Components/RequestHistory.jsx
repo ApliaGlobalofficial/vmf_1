@@ -57,7 +57,7 @@ const RequestHistory = () => {
       {!loading && !error && (
         <div className="overflow-x-auto w-full max-w-6xl bg-white rounded-2xl shadow-lg p-6">
           <table className="min-w-full table-auto border-collapse border border-gray-300 text-left">
-            <thead className="bg-blue-600 text-white">
+            <thead className="bg-[#F88F2A] text-white">
               <tr>
                 <th className="px-5 py-3 border border-blue-700">Account Number</th>
                 <th className="px-5 py-3 border border-blue-700">IFSC Code</th>
@@ -83,7 +83,7 @@ const RequestHistory = () => {
                   >
                     <td className="px-5 py-3 border border-gray-300">{req.account_number}</td>
                     <td className="px-5 py-3 border border-gray-300">{req.ifsc_code}</td>
-                    <td className="px-5 py-3 border border-gray-300 font-semibold text-blue-700">
+                    <td className="px-5 py-3 border border-gray-300 font-semibold ">
                       ₹ {req.requested_amount}
                     </td>
                     <td className="px-5 py-3 border border-gray-300">{formatDate(req.requested_amount_date)}</td>

@@ -320,7 +320,7 @@ const Distributordashboard = ({ children }) => {
             {/* Wallet Balance */}
             <div
               className="flex gap-2 items-center bg-[#2563EB] text-white px-3 py-1 rounded-md cursor-pointer shadow hover:bg-blue-700 transition"
-              onClick={() => navigate("/wallet")}
+              onClick={() => navigate("")} // /wallet
             >
               <FaWallet size={24} />
               <span className="text-sm font-semibold">
@@ -338,7 +338,9 @@ const Distributordashboard = ({ children }) => {
             >
               <FaRegCircleUser className="text-white" size={40} />
               {showEmail && (
-                <div className="absolute top-12 left-1/2 transform -translate-x-1/2 bg-white text-black p-2 rounded-md w-48 text-center shadow-lg">
+                <div className="absolute top-12 left-1/2 transform -translate-x-1/2 bg-white text-black p-2 rounded-md w-48 text-center shadow-lg"
+                onClick={() => navigate("/ProfilePageD")}>
+                  
                   {userEmail}
                 </div>
               )}

@@ -253,7 +253,7 @@ const Admindashboard = ({ children }) => {
           <div className="flex items-center gap-6 relative">
             <div
               className="flex gap-2 items-center bg-[#2563EB] text-white px-3 py-1 rounded-md cursor-pointer shadow hover:bg-blue-700 transition"
-              onClick={() => navigate("/wallet")}
+              onClick={() => navigate("")} //  / wallet
             >
               <FaWallet size={24} />
               <span className="text-sm font-semibold">

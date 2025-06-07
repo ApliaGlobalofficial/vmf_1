@@ -72,7 +72,7 @@ export default function WalletHistoryD() {
             onClick={() => setFilter(type)}
             className={`px-4 py-2 rounded-md font-semibold 
               ${filter === type
-                ? "bg-blue-600 text-white"
+                ? "bg-[#F88F2A] text-white"
                 : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
               }`}
           >

@@ -76,36 +76,85 @@ const AddCategory = () => {
     }
   };
 
-  const handleDeleteCategory = async (id) => {
-    const confirmDelete = await Swal.fire({
-      title: "Enter Deletion Code",
-      text: "Please enter the code to confirm deletion.",
-      input: "text",
-      inputPlaceholder: "Enter code here...",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Delete",
-      preConfirm: (inputValue) => {
-        if (inputValue !== "0000") {
-          Swal.showValidationMessage("Incorrect code! Deletion not allowed.");
-          return false;
-        }
-        return true;
-      },
-    });
+  // const handleDeleteCategory = async (id) => {
+  //   const confirmDelete = await Swal.fire({
+  //     title: "Enter Deletion Code",
+  //     text: "Please enter the code to confirm deletion.",
+  //     input: "text",
+  //     inputPlaceholder: "Enter code here...",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#d33",
+  //     cancelButtonColor: "#3085d6",
+  //     confirmButtonText: "Delete",
+  //     preConfirm: (inputValue) => {
+  //       if (inputValue !== "0000") {
+  //         Swal.showValidationMessage("Incorrect code! Deletion not allowed.");
+  //         return false;
+  //       }
+  //       return true;
+  //     },
+  //   });
 
-    if (confirmDelete.isConfirmed) {
-      try {
-        await axios.delete(`${apiUrl}/categories/${id}`);
-        setCategories((prev) =>
-          prev.filter((category) => category.category_id !== id)
-        );
-        Swal.fire("Deleted!", "Category has been deleted.", "success");
-      } catch (error) {
-        console.error("Error deleting category:", error);
-        Swal.fire("Error", "Failed to delete category", "error");
+  //   if (confirmDelete.isConfirmed) {
+  //     try {
+  //       await axios.delete(`${apiUrl}/categories/${id}`);
+  //       setCategories((prev) =>
+  //         prev.filter((category) => category.category_id !== id)
+  //       );
+  //       Swal.fire("Deleted!", "Category has been deleted.", "success");
+  //     } catch (error) {
+  //       console.error("Error deleting category:", error);
+  //       Swal.fire("Error", "Failed to delete category", "error");
+  //     }
+  //   }
+  // };
+
+  const handleDeleteCategory = async (id, categoryName) => {
+    // Step 1: Generate a 4-digit OTP
+    const generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
+
+    try {
+      // Step 2: Send OTP via SMS
+      await axios.post(`${import.meta.env.VITE_API_URL}/sms/send`, {
+        to: "918308178738", // Replace with dynamic number if needed
+        message: `OTP for deleting category "${categoryName}" is: ${generatedOtp}`,
+      });
+
+      // Step 3: Ask user to enter OTP
+      const confirmDelete = await Swal.fire({
+        title: "Enter OTP",
+        text: `OTP sent for deleting "${categoryName}". Please enter it to confirm deletion.`,
+        input: "text",
+        inputPlaceholder: "Enter OTP here...",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Confirm",
+        preConfirm: (inputValue) => {
+          if (inputValue !== generatedOtp) {
+            Swal.showValidationMessage("Incorrect OTP! Deletion not allowed.");
+            return false;
+          }
+          return true;
+        },
+      });
+
+      // Step 4: If OTP is valid, delete the category
+      if (confirmDelete.isConfirmed) {
+        try {
+          await axios.delete(`${import.meta.env.VITE_API_URL}/categories/${id}`);
+          setCategories((prev) =>
+            prev.filter((category) => category.category_id !== id)
+          );
+          Swal.fire("Deleted!", "Category has been deleted.", "success");
+        } catch (error) {
+          console.error("Error deleting category:", error);
+          Swal.fire("Error", "Failed to delete category", "error");
+        }
       }
+    } catch (error) {
+      console.error("Failed to send OTP:", error);
+      Swal.fire("Error", "Failed to send OTP. Try again later.", "error");
     }
   };
 
@@ -158,9 +207,8 @@ const AddCategory = () => {
                 categories.map((category, index) => (
                   <tr
                     key={category.category_id}
-                    className={`${
-                      index % 2 === 0 ? "bg-[#FFFFFF]" : "bg-[#F58A3B14]"
-                    } hover:bg-orange-100 transition duration-200`}
+                    className={`${index % 2 === 0 ? "bg-[#FFFFFF]" : "bg-[#F58A3B14]"
+                      } hover:bg-orange-100 transition duration-200`}
                   >
                     <td className="px-4 py-3 border border-[#776D6DA8] text-center">
                       {category.category_id}
@@ -200,14 +248,23 @@ const AddCategory = () => {
                           <FaEdit />
                         </button>
                       )}
-                      <button
+                      {/* <button
                         onClick={() =>
                           handleDeleteCategory(category.category_id)
                         }
                         className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                       >
                         <FaTrash />
+                      </button> */}
+                      <button
+                        onClick={() =>
+                          handleDeleteCategory(category.category_id, category.category_name)
+                        }
+                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                      >
+                        <FaTrash />
                       </button>
+
                     </td>
                   </tr>
                 ))

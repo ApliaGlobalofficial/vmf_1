@@ -96,40 +96,88 @@ const Addsubcategory = () => {
     }
   };
 
-  const deleteSubcategory = async (id) => {
-    const confirmDelete = await Swal.fire({
-      title: "Enter Deletion Code",
-      text: "Please enter the code to confirm deletion.",
-      input: "text",
-      inputPlaceholder: "Enter code here...",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Delete",
-      preConfirm: (inputValue) => {
-        if (inputValue !== "0000") {
-          Swal.showValidationMessage("Incorrect code! Deletion not allowed.");
-          return false;
+  // const deleteSubcategory = async (id) => {
+  //   const confirmDelete = await Swal.fire({
+  //     title: "Enter Deletion Code",
+  //     text: "Please enter the code to confirm deletion.",
+  //     input: "text",
+  //     inputPlaceholder: "Enter code here...",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#d33",
+  //     cancelButtonColor: "#3085d6",
+  //     confirmButtonText: "Delete",
+  //     preConfirm: (inputValue) => {
+  //       if (inputValue !== "0000") {
+  //         Swal.showValidationMessage("Incorrect code! Deletion not allowed.");
+  //         return false;
+  //       }
+  //       return true;
+  //     },
+  //   });
+
+  //   if (confirmDelete.isConfirmed) {
+  //     Swal.fire("Deleted!", "Subcategory has been deleted.", "success");
+
+  //     try {
+  //       await axios.delete(`${import.meta.env.VITE_API_URL}/subcategories/${id}`);
+  //       setSubcategories((prev) =>
+  //         prev.filter((sub) => sub.subcategory_id !== id)
+  //       );
+  //     } catch (error) {
+  //       console.error("Error deleting subcategory:", error);
+  //       Swal.fire("Error", "Failed to delete subcategory", "error");
+  //     }
+  //   }
+  // };
+
+  const deleteSubcategory = async (id, subcategoryName) => {
+    // Step 1: Generate OTP
+    const generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
+
+    try {
+      // Step 2: Send OTP via SMS
+      await axios.post(`${import.meta.env.VITE_API_URL}/sms/send`, {
+        to: "918308178738", // Replace with the actual recipient number if dynamic
+        message: `OTP for deleting subcategory "${subcategoryName}" is: ${generatedOtp}`,
+      });
+
+      // Step 3: Prompt for OTP
+      const confirmDelete = await Swal.fire({
+        title: "Enter OTP",
+        text: `An OTP has been sent to your registered number to confirm deletion of "${subcategoryName}".`,
+        input: "text",
+        inputPlaceholder: "Enter OTP here...",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Confirm",
+        preConfirm: (inputValue) => {
+          if (inputValue !== generatedOtp) {
+            Swal.showValidationMessage("Incorrect OTP! Deletion not allowed.");
+            return false;
+          }
+          return true;
+        },
+      });
+
+      // Step 4: Proceed with deletion if confirmed
+      if (confirmDelete.isConfirmed) {
+        try {
+          await axios.delete(`${import.meta.env.VITE_API_URL}/subcategories/${id}`);
+          setSubcategories((prev) =>
+            prev.filter((sub) => sub.subcategory_id !== id)
+          );
+          Swal.fire("Deleted!", "Subcategory has been deleted.", "success");
+        } catch (error) {
+          console.error("Error deleting subcategory:", error);
+          Swal.fire("Error", "Failed to delete subcategory", "error");
         }
-        return true;
-      },
-    });
-
-    if (confirmDelete.isConfirmed) {
-      Swal.fire("Deleted!", "Subcategory has been deleted.", "success");
-
-      try {
-        await axios.delete(`${import.meta.env.VITE_API_URL}/subcategories/${id}`);
-        setSubcategories((prev) =>
-          prev.filter((sub) => sub.subcategory_id !== id)
-        );
-      } catch (error) {
-        console.error("Error deleting subcategory:", error);
-        Swal.fire("Error", "Failed to delete subcategory", "error");
       }
+    } catch (error) {
+      console.error("Failed to send OTP:", error);
+      Swal.fire("Error", "Failed to send OTP. Try again later.", "error");
     }
   };
-
   return (
     <div className="ml-[300px] mt-[80px] p-6 w-[calc(100%-260px)] overflow-x-hidden">
       <div className="relative bg-white shadow-lg rounded-lg border border-gray-300 overflow-hidden">
@@ -177,9 +225,8 @@ const Addsubcategory = () => {
                 subcategories.map((sub, index) => (
                   <tr
                     key={sub.subcategory_id}
-                    className={`${
-                      index % 2 === 0 ? "bg-[#FFFF]" : "bg-[#F58A3B14]"
-                    } hover:bg-orange-100 transition duration-200`}
+                    className={`${index % 2 === 0 ? "bg-[#FFFF]" : "bg-[#F58A3B14]"
+                      } hover:bg-orange-100 transition duration-200`}
                   >
                     <td className="px-4 py-3 border border-[#776D6DA8] text-center">
                       {sub.subcategory_id}
@@ -217,12 +264,19 @@ const Addsubcategory = () => {
                           <FaEdit />
                         </button>
                       )}
-                      <button
+                      {/* <button
                         onClick={() => deleteSubcategory(sub.subcategory_id)}
                         className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                       >
                         <FaTrash />
+                      </button> */}
+                      <button
+                        onClick={() => deleteSubcategory(sub.subcategory_id, sub.subcategory_name)}
+                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                      >
+                        <FaTrash />
                       </button>
+
                     </td>
                   </tr>
                 ))

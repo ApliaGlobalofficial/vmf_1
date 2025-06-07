@@ -99,6 +99,7 @@ import RequestAmount from "./Components/RequestAmount";
 import RequestedMoney from "./Components/RequestedMoney";
 import RequestHistory from "./Components/RequestHistory";
 import SendMoney from "./Components/SendMoney";
+import ProfilePageD from "./Components/ProfilePageD";
 function App() {
   return (
     <Router>
@@ -709,7 +710,14 @@ function App() {
             </Distributordashboard>
           }
         />
-        
+        <Route
+          path="/ProfilePageD"
+          element={
+            <Distributordashboard>
+              <ProfilePageD />
+            </Distributordashboard>
+          }
+        />
         <Route
           path="/RequestHistory"
           element={
