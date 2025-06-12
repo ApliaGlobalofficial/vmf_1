@@ -378,14 +378,14 @@ function App() {
             </Admindashboard>
           }
         />
-        <Route
+        {/* <Route
           path="/approverequests"
           element={
             <Admindashboard>
               <ApproveRequests />
             </Admindashboard>
           }
-        />
+        /> */}
         <Route
           path="/send-money/:requestId"
           element={

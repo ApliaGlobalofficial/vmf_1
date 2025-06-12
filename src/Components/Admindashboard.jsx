@@ -172,11 +172,11 @@ const Sidebar = ({ onNavigate }) => {
                 label: "Requested Money",
                 path: "/RequestedMoney",
               },
-              {
-                icon: <FaWallet />,
-                label: "Approve Requested",
-                path: "/approverequests",
-              },
+              // {
+              //   icon: <FaWallet />,
+              //   label: "Approve Requested",
+              //   path: "/approverequests",
+              // },
             ].map((item, index) => (
               <li
                 key={index}
